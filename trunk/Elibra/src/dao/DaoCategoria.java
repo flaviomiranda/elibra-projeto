@@ -68,7 +68,7 @@ public Map<Integer, Categoria> selectAllCategoriaMapCod()
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()){
                         do{
-                            mapCategoria.put((Integer)rs.getDouble(1), new Categoria(rs.getDouble(1),rs.getString(2)));
+                            mapCategoria.put((int)rs.getDouble(1), new Categoria(rs.getDouble(1),rs.getString(2)));
                          }while(rs.next());}
 	  return mapCategoria;
 	  }
