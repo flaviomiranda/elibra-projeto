@@ -94,7 +94,7 @@ public Map<Integer,Marca> selectAllMarcaMap()
 		Map<Integer,Marca> map = new TreeMap<Integer,Marca>();
 		if(rs.next()){
                     do{
-		    map.put((Integer)rs.getDouble(1), new Marca(rs.getDouble(1),rs.getDouble(2),rs.getString(3)));
+		    map.put((int)rs.getDouble(1), new Marca(rs.getDouble(1),rs.getDouble(2),rs.getString(3)));
 	    }while(rs.next()); }
 	  return map;
 	  }
