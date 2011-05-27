@@ -1,0 +1,166 @@
+
+2011-05-14-00.45.51 - Erro ao conectar
+2011-05-14-00.45.51 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+The Connection descriptor used by the client was:
+localhost:1521:XE
+
+2011-05-14-00.45.51 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+The Connection descriptor used by the client was:
+localhost:1521:XE
+
+2011-05-14-00.45.51 - null
+2011-05-14-00.45.51 - class java.sql.SQLException
+
+2011-05-14-01.22.48 - Erro ao conectar
+2011-05-14-01.22.48 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+The Connection descriptor used by the client was:
+localhost:1521:XE
+
+2011-05-14-01.22.48 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+The Connection descriptor used by the client was:
+localhost:1521:XE
+
+2011-05-14-01.22.48 - null
+2011-05-14-01.22.48 - class java.sql.SQLException
+
+2011-05-14-01.26.15 - Erro ao conectar
+2011-05-14-01.26.15 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+The Connection descriptor used by the client was:
+localhost:1521:XE
+
+2011-05-14-01.26.15 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+The Connection descriptor used by the client was:
+localhost:1521:XE
+
+2011-05-14-01.26.15 - null
+2011-05-14-01.26.15 - class java.sql.SQLException
+
+2011-05-14-02.10.14 - Erro no INSERT na TVENDA
+2011-05-14-02.10.14 - ORA-02291: integrity constraint (RAFAEL.SYS_C004290) violated - parent key not found
+
+2011-05-14-02.12.25 - Erro no INSERT na TVENDA
+2011-05-14-02.12.25 - ORA-02291: integrity constraint (RAFAEL.SYS_C004290) violated - parent key not found
+
+2011-05-14-02.15.10 - Erro ao conectar
+2011-05-14-02.15.10 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+The Connection descriptor used by the client was:
+localhost:1521:XE
+
+2011-05-14-02.15.10 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+The Connection descriptor used by the client was:
+localhost:1521:XE
+
+2011-05-14-02.15.10 - null
+2011-05-14-02.15.10 - class java.sql.SQLException
+
+2011-05-14-02.16.39 - Erro ao conectar
+2011-05-14-02.16.39 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+The Connection descriptor used by the client was:
+localhost:1521:XE
+
+2011-05-14-02.16.39 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+The Connection descriptor used by the client was:
+localhost:1521:XE
+
+2011-05-14-02.16.39 - null
+2011-05-14-02.16.39 - class java.sql.SQLException
+
+2011-05-14-02.26.03 - Erro ao conectar
+2011-05-14-02.26.03 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+
+2011-05-14-02.26.03 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+
+2011-05-14-02.26.03 - null
+2011-05-14-02.26.03 - class java.sql.SQLException
+
+2011-05-14-02.44.57 - Erro ao conectar
+2011-05-14-02.44.57 - Listener refused the connection with the following error:
+ORA-12505, TNS:listener does not currently know of SID given in connect descriptor
+
+2011-05-14-02.44.57 - Listener refused the connection with the following error:
+ORA-12505, TNS:listener does not currently know of SID given in connect descriptor
+
+2011-05-14-02.44.57 - null
+2011-05-14-02.44.57 - class java.sql.SQLException
+
+2011-05-14-02.46.15 - Erro ao conectar
+2011-05-14-02.46.15 - Listener refused the connection with the following error:
+ORA-12505, TNS:listener does not currently know of SID given in connect descriptor
+
+2011-05-14-02.46.15 - Listener refused the connection with the following error:
+ORA-12505, TNS:listener does not currently know of SID given in connect descriptor
+
+2011-05-14-02.46.15 - null
+2011-05-14-02.46.15 - class java.sql.SQLException
+
+2011-05-14-02.54.44 - Erro ao conectar
+2011-05-14-02.54.44 - Listener refused the connection with the following error:
+ORA-12505, TNS:listener does not currently know of SID given in connect descriptor
+
+2011-05-14-02.54.44 - Listener refused the connection with the following error:
+ORA-12505, TNS:listener does not currently know of SID given in connect descriptor
+
+2011-05-14-02.54.44 - null
+2011-05-14-02.54.44 - class java.sql.SQLException
+
+2011-05-14-03.01.20 - Erro ao conectar
+2011-05-14-03.01.20 - Listener refused the connection with the following error:
+ORA-12505, TNS:listener does not currently know of SID given in connect descriptor
+
+2011-05-14-03.01.20 - Listener refused the connection with the following error:
+ORA-12505, TNS:listener does not currently know of SID given in connect descriptor
+
+2011-05-14-03.01.20 - null
+2011-05-14-03.01.20 - class java.sql.SQLException
+
+2011-05-14-03.10.26 - Erro ao conectar
+2011-05-14-03.10.26 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+
+2011-05-14-03.10.26 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+
+2011-05-14-03.10.26 - null
+2011-05-14-03.10.26 - class java.sql.SQLException
+
+2011-05-14-03.12.12 - Erro ao conectar
+2011-05-14-03.12.12 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+
+2011-05-14-03.12.12 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+
+2011-05-14-03.12.12 - null
+2011-05-14-03.12.12 - class java.sql.SQLException
+
+2011-05-14-03.13.18 - Erro ao conectar
+2011-05-14-03.13.18 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+
+2011-05-14-03.13.18 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+
+2011-05-14-03.13.18 - null
+2011-05-14-03.13.18 - class java.sql.SQLException
+
+2011-05-14-03.20.04 - Erro ao conectar
+2011-05-14-03.20.04 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+
+2011-05-14-03.20.04 - Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+
+2011-05-14-03.20.04 - null
+2011-05-14-03.20.04 - class java.sql.SQLException
