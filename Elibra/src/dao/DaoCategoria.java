@@ -34,6 +34,31 @@ public Categoria selectCategoria(double codigo)
 			ConFactory.fechar(con,ps);
 		}
 	}
+
+public Categoria selectCategoriaNome(String nome)
+	{
+		Connection con = ConFactory.conectar(0);
+		PreparedStatement ps = null;
+		try {
+			ps = con.prepareStatement("SELECT CD_CAT, DS_CAT FROM TCATEGORIA WHERE UPPER(DS_CAT) LIKE ?");
+			ps.setString(1, nome);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next())
+			{
+			    return new Categoria(rs.getDouble(1),rs.getString(2));
+			}else
+			{
+			    return null;
+			}   
+		    }
+			catch (SQLException e) {
+			TrataErro.imprimeErro("Erro no SELECT na TCATEGORIA", e.getMessage());
+			return null;
+		}
+		finally{
+			ConFactory.fechar(con,ps);
+		}
+	}
 	
 public Map<String, Categoria> selectAllCategoriaMap()
 	{

@@ -433,6 +433,12 @@ public class TelaProdutoInclusao extends javax.swing.JDialog {
                 if(novacategoria !=null)
                 {
                     DaoCategoria daocategoria = new DaoCategoria();
+                    Categoria c = daocategoria.selectCategoriaNome(novacategoria.toUpperCase());
+                    if (c !=null)
+                    {
+                        JOptionPane.showMessageDialog(null, "Categoria Já Existe");
+                        return;
+                    }
                     double seq = daocategoria.selectMaxCategoria();
                     seq = seq + 1;
                     if (daocategoria.insertCategoria(new Categoria(seq, novacategoria)) == 0)
@@ -467,9 +473,15 @@ public class TelaProdutoInclusao extends javax.swing.JDialog {
                 if(novamarca !=null)
                 {
                     DaoMarca daomarca = new DaoMarca();
+                    Categoria c = obtemCategoriaSelecionada();
+                    Marca m = daomarca.selectMarcaNome(novamarca.toUpperCase(), c.getCD_CAT());
+                    if (c != null)
+                    {
+                        JOptionPane.showMessageDialog(null, "Marca Já Existe");
+                    }
                     double seq = daomarca.selectMaxMarca();
                     seq = seq + 1;
-                    Categoria c = obtemCategoriaSelecionada();
+                    
                     if (daomarca.InsertMarca(new Marca(seq,c.getCD_CAT(), novamarca)) == 0)
                         JOptionPane.showMessageDialog(null, "Marca Incluida com Sucesso!!");
                         preencherCbbMarca(c.getCD_CAT());
