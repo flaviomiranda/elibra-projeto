@@ -35,6 +35,32 @@ public Marca selectMarca(double codigo)
 			ConFactory.fechar(con,ps);
 		}
 	}
+
+public Marca selectMarcaNome(String nome, double categoria)
+	{
+		Connection con = ConFactory.conectar(0);
+		PreparedStatement ps = null;
+		try {
+			ps = con.prepareStatement("SELECT CD_MARCA, CD_CAT, NM_MARCA FROM TMARCA WHERE CD_CAT = ? AND UPPER(NM_MARCA) LIKE ?");
+			ps.setDouble(1, categoria);
+                        ps.setString(2, nome);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next())
+			{
+			    return new Marca(rs.getDouble(1),rs.getDouble(2),rs.getString(3));
+			}else
+			{
+			    return null;
+			}   
+		    }
+			catch (SQLException e) {
+			TrataErro.imprimeErro("Erro no SELECT na TMARCA", e.getMessage());
+			return null;
+		}
+		finally{
+			ConFactory.fechar(con,ps);
+		}
+	}
 	
 public ArrayList<Marca> selectAllMarca(double categoria)
 	{

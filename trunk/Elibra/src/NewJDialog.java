@@ -1,6 +1,11 @@
 
+import dao.DaoCategoria;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.TreeMap;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import model.Categoria;
 
 /*
  * To change this template, choose Tools | Templates
@@ -23,8 +28,19 @@ public class NewJDialog extends javax.swing.JDialog {
     public NewJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
-
+        //DaoCategoria daocategoria = new DaoCategoria();
+        //TreeMap<String, Categoria> mapcateg = (TreeMap) daocategoria.selectAllCategoriaMap();
+        
+        
+        ArrayList<Categoria> listacateg = new ArrayList<Categoria>();
+        listacateg.add(new Categoria(1, "Categoria 1"));
+        listacateg.add(new Categoria(2, "Categoria 2"));
+        String arraycateg[] = new String[listacateg.size()];
+        for(int x=0; x<listacateg.size(); x++)
+            arraycateg[x] = listacateg.get(x).getDS_CAT();
+                
+        String y = (String) JOptionPane.showInputDialog(null, "Selecione em qual categoria será incluida a Marca", "Inclusão Marca", JOptionPane.QUESTION_MESSAGE, null, arraycateg, rootPaneCheckingEnabled) ;
+        System.out.println(y);
         TreeMap<String,Integer> tree = new TreeMap<String,Integer>();
         tree.put("1", 10);
         tree.put("2", 20);

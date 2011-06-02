@@ -118,7 +118,7 @@ public class TelaCaixa extends javax.swing.JDialog {
 
     public void concedeDesconto()
     {
-        String txtdesconto = (String) JOptionPane.showInputDialog(null, "Digite a Porcentagem de Desconto", "Desconto", JOptionPane.QUESTION_MESSAGE, null, null, valordesconto);
+        String txtdesconto = (String) JOptionPane.showInputDialog(null, "Digite o valor(R$) do desconto", "Desconto", JOptionPane.QUESTION_MESSAGE, null, null, valordesconto);
         if (txtdesconto == null)
             return;
         if (txtdesconto.equals(""))
@@ -362,8 +362,7 @@ public class TelaCaixa extends javax.swing.JDialog {
             notafiscalxtxt += " " + notafiscal.get(qtdlinhainicio)+"\n";
             qtdlinhainicio++;
         }
-        txtNotaFiscal.setText(notafiscalxtxt);
-        
+        txtNotaFiscal.setText(notafiscalxtxt);        
         //label de totais
             exibetotais();
     }
@@ -373,8 +372,7 @@ public class TelaCaixa extends javax.swing.JDialog {
         txtValorTotal.setText(Formatador.formataVirgula2(valortotal));
         txtSubtotal.setText(Formatador.formataVirgula2(valortotal));
         double desconto = valordesconto;
-        desconto = 1 - (desconto/100);
-        double totalgeraldesc = totalgeral*desconto;
+        double totalgeraldesc = totalgeral - desconto;
         lblTotalGeral.setText(Formatador.formataVirgula2(totalgeraldesc));
     }
 

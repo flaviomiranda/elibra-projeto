@@ -11,12 +11,20 @@
 
 package telas;
 
+import dao.DaoCategoria;
+import dao.DaoFormaPagamento;
 import dao.DaoFuncionario;
 import dao.DaoLogin;
+import dao.DaoMarca;
 import dao.DaoProduto;
+import java.util.ArrayList;
+import java.util.TreeMap;
 import javax.swing.JOptionPane;
+import model.Categoria;
+import model.FormaPagamento;
 import model.Funcionario;
 import model.Login;
+import model.Marca;
 import model.Produto;
 import relatorios.RelatorioRelacaoProdutos;
 import utilitarios.Formatador;
@@ -29,12 +37,17 @@ import utilitarios.TrataErro;
 public class TelaMenu extends javax.swing.JFrame {
 
     String loginglobal;
+    Funcionario f;
     public TelaMenu() {
         initComponents();
     }
     public TelaMenu(String login) {
         initComponents();
         loginglobal = login;
+        DaoLogin daologin = new DaoLogin();
+        Login l = daologin.selectLogin(loginglobal);
+        DaoFuncionario daofuncionario = new DaoFuncionario();
+        f = daofuncionario.selectFuncionario(l.getCD_FUNC());
     }
 
     @SuppressWarnings("unchecked")
@@ -60,6 +73,13 @@ public class TelaMenu extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -154,6 +174,44 @@ public class TelaMenu extends javax.swing.JFrame {
         jMenu6.add(jMenuItem7);
 
         jMenuBar1.add(jMenu6);
+
+        jMenu7.setText("Serviços");
+
+        jMenu8.setText("Incluir");
+
+        jMenuItem9.setText("Categoria");
+        jMenuItem9.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jMenuItem9KeyReleased(evt);
+            }
+        });
+        jMenu8.add(jMenuItem9);
+
+        jMenuItem8.setText("Forma de Pagamento");
+        jMenuItem8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jMenuItem8MouseReleased(evt);
+            }
+        });
+        jMenu8.add(jMenuItem8);
+
+        jMenuItem10.setText("Marca");
+        jMenuItem10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jMenuItem10MouseReleased(evt);
+            }
+        });
+        jMenu8.add(jMenuItem10);
+
+        jMenuItem11.setText("Motivo Estorno");
+        jMenu8.add(jMenuItem11);
+
+        jMenu7.add(jMenu8);
+
+        jMenuItem12.setText("Configura Impressão");
+        jMenu7.add(jMenuItem12);
+
+        jMenuBar1.add(jMenu7);
 
         setJMenuBar(jMenuBar1);
 
@@ -256,21 +314,85 @@ public class TelaMenu extends javax.swing.JFrame {
 
     private void jMenuItem7MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem7MouseReleased
         // TODO add your handling code here:
-        DaoLogin daologin = new DaoLogin();
-        Login l = daologin.selectLogin(loginglobal);
-        DaoFuncionario daofuncionario = new DaoFuncionario();
-        Funcionario f = daofuncionario.selectFuncionario(l.getCD_FUNC());
         if (f.getCD_ACESSO() == 0)
         {
             Exception e = null;
             JOptionPane.showMessageDialog(null,"Você não possui acesso, consulte administrador");
-            TrataErro.imprimeErro("O login: " + l.getLOGIN() + "tentou acessar o relatorio de relacao de produtos e nao possui acesso", e);
+            TrataErro.imprimeErro("O login: " + loginglobal + "tentou acessar o relatorio de relacao de produtos e nao possui acesso", e);
         }
         RelatorioRelacaoProdutos rrp = new RelatorioRelacaoProdutos(null, true);
         rrp.setLocationRelativeTo(null);
         rrp.setVisible(true);
         
     }//GEN-LAST:event_jMenuItem7MouseReleased
+
+    private void jMenuItem9KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMenuItem9KeyReleased
+
+         String novacategoria = JOptionPane.showInputDialog(null, "Digite a Nova Categoria a ser Cadastrada", "Cadastro de Nova Categoria", JOptionPane.QUESTION_MESSAGE);
+                if(novacategoria !=null)
+                {
+                    DaoCategoria daocategoria = new DaoCategoria();
+                    Categoria c = daocategoria.selectCategoriaNome(novacategoria.toUpperCase());
+                    if (c != null)
+                    {
+                        JOptionPane.showMessageDialog(null, "Categoria Já Existe");
+                        return;
+                    }
+                    double seq = daocategoria.selectMaxCategoria();
+                    seq = seq + 1;
+                    if (daocategoria.insertCategoria(new Categoria(seq, novacategoria)) == 0)
+                        JOptionPane.showMessageDialog(null, "Categoria Incluida com Sucesso!!");
+                 }
+    }//GEN-LAST:event_jMenuItem9KeyReleased
+
+    private void jMenuItem10MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem10MouseReleased
+
+        DaoCategoria daocategoria = new DaoCategoria();
+        TreeMap<String, Categoria> mapcateg = (TreeMap) daocategoria.selectAllCategoriaMap();
+        ArrayList<Categoria> listacateg = daocategoria.selectAllCategoria();
+        String arraycateg[] = new String[listacateg.size()];
+        for(int x=0; x<listacateg.size(); x++)
+            arraycateg[x] = listacateg.get(x).getDS_CAT();
+                
+        String categsel = (String) JOptionPane.showInputDialog(null, "Selecione em qual categoria será incluida a Marca", "Inclusão Marca", JOptionPane.QUESTION_MESSAGE, null, arraycateg, rootPaneCheckingEnabled) ;
+        Categoria c = mapcateg.get(categsel); 
+        
+        String novamarca = JOptionPane.showInputDialog(null, "Digite a Nova Marca a ser Cadastrada", "Cadastro de Nova Marca", JOptionPane.QUESTION_MESSAGE);
+        if(novamarca == null)
+            return;
+        DaoMarca daomarca = new DaoMarca();
+        Marca m = daomarca.selectMarcaNome(novamarca.toUpperCase(), c.getCD_CAT());
+        if (c != null)
+        {
+            JOptionPane.showMessageDialog(null, "Marca Já Existe");
+        }
+        double seq = daomarca.selectMaxMarca();
+        seq = seq + 1;       
+        if (daomarca.InsertMarca(new Marca(seq,c.getCD_CAT(), novamarca)) == 0)
+            JOptionPane.showMessageDialog(null, "Marca Incluida com Sucesso!!");    
+    }//GEN-LAST:event_jMenuItem10MouseReleased
+
+    private void jMenuItem8MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem8MouseReleased
+        if (f.getCD_ACESSO() == 0)
+        {
+            Exception e = null;
+            JOptionPane.showMessageDialog(null,"Você não possui acesso, consulte administrador");
+            TrataErro.imprimeErro("O login: " + loginglobal + "tentou acessar a inclusao de forma de pagamento e nao possui acesso", e);
+        }
+        else
+        {
+           String formapgto = JOptionPane.showInputDialog(null, "Digite a Nova Forma de Pagamento");
+           if (formapgto == null || formapgto.equals(""))
+               return;
+           DaoFormaPagamento daoformapagamento = new DaoFormaPagamento();
+           FormaPagamento fp = daoformapagamento.FormaPagamentoNome(formapgto.toUpperCase());
+           if (fp != null)
+           {
+               JOptionPane.showMessageDialog(null, "Forma de Pagamento Já Existe");
+               return;
+           }
+        }
+    }//GEN-LAST:event_jMenuItem8MouseReleased
 
     /**
     * @param args the command line arguments
@@ -292,15 +414,22 @@ public class TelaMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     // End of variables declaration//GEN-END:variables
