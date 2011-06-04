@@ -14,6 +14,7 @@ import dao.DaoCategoria;
 import utilitarios.Formatador;
 import dao.DaoMarca;
 import dao.DaoProduto;
+import dao.DaoVendaProduto;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,20 +22,19 @@ import java.util.TreeMap;
 import model.Categoria;
 import model.Marca;
 import model.Produto;
+import model.Venda;
+import model.VendaProduto;
 import utilitarios.Formatador;
 import utilitarios.Impressao;
 
-/**
- *
- * @author Rafael
- */
-public class RelatorioRelacaoProdutos extends javax.swing.JDialog {
+
+public class RelatorioPeriodo extends javax.swing.JDialog {
 
     /** Creates new form RelatorioRelacaoProdutos */
-    public RelatorioRelacaoProdutos(java.awt.Frame parent, boolean modal) {
+    public RelatorioPeriodo(java.awt.Frame parent, boolean modal, ArrayList<Venda> lista) {
         super(parent, modal);
         initComponents();
-        carregaRelatorio();
+        carregaRelatorio(lista);
     }
 
     /** This method is called from within the constructor to
@@ -135,19 +135,27 @@ public class RelatorioRelacaoProdutos extends javax.swing.JDialog {
         Impressao p = new Impressao();
         p.imprime(texto);
     }//GEN-LAST:event_jButton2ActionPerformed
-    public void carregaRelatorio()
+    public void carregaRelatorio(ArrayList<Venda> lista)
     {
     	DaoCategoria daocategoria = new DaoCategoria();
     	DaoMarca daomarca = new DaoMarca();
     	DaoProduto daoproduto = new DaoProduto();
     	TreeMap<Integer,Categoria> mapcateg = (TreeMap) daocategoria.selectAllCategoriaMapCod();
     	TreeMap<Integer,Marca> mapmarca = (TreeMap) daomarca.selectAllMarcaMap();
-    	ArrayList<Produto> listaproduto = daoproduto.selectAllProduto();
-    	String det="";
-    	for(int x=0;x<listaproduto.size(); x++)
-    	{
-    		Produto p = listaproduto.get(x);
-    		Marca m = mapmarca.get((int)p.getCD_MARCA());
+        TreeMap<Double,Produto> mapproduto = daoproduto.selectAllProdutoMap();
+        String det="";
+        for(int x=0; x<lista.size();x++)
+        {
+            Venda v = lista.get(x);
+            det+="Detalhe da Venda: " + v.getCD_VENDA() + "\n";
+            DaoVendaProduto daovendaproduto = new DaoVendaProduto();
+            ArrayList<VendaProduto> listavendaproduto = new ArrayList<VendaProduto>();
+            listavendaproduto = daovendaproduto.selectVendaProduto(v.getCD_VENDA());
+            for(int y=0;y<listavendaproduto.size();y++)
+            {
+                VendaProduto vp = listavendaproduto.get(y);
+                Produto p = mapproduto.get(vp.getCD_PROD());
+                Marca m = mapmarca.get((int)p.getCD_MARCA());
     		Categoria c = mapcateg.get((int)m.getCD_CAT());
             Date dtvalidade = p.getDT_VAL_PROD();
             String dtvalidadetxt="";
@@ -163,8 +171,9 @@ public class RelatorioRelacaoProdutos extends javax.swing.JDialog {
             String lin =  Formatador.tamanhoDe(p.getNM_PROD(),60)+ "  " + Formatador.tamanhoDe(c.getDS_CAT(),30) + "  " +  Formatador.tamanhoDe(m.getNM_MARCA(),30) + "  " +
     		qtdprod + "  R$ " + vlunit + "  " + dtvalidadetxt + "\n";
             det +=lin;
-    	}    	     
-        txtRelatorio.setText(det);
+            }
+            txtRelatorio.setText(det);
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

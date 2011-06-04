@@ -7,6 +7,27 @@ import utilitarios.TrataErro;
 
 public class DaoFormaPagamento {
 
+    public int insertFormaPagamento(FormaPagamento f)
+	{
+		Connection con = ConFactory.conectar(0);
+		PreparedStatement ps = null;
+		try {
+			ps = con.prepareStatement("INSERT INTO TFORM_PGMTO VALUES (?, ?)");
+			ps.setDouble(1, f.getCD_FORM_PGMTO());
+			ps.setString(2, f.getNM_FORM_PGMTO());
+			ps.executeUpdate();
+			return 0;
+			  }
+			catch (SQLException e) {
+			TrataErro.imprimeErro("Erro no INSERT na TFORM_PGMTO", e.getMessage());
+			return 99;
+		}
+		finally{
+			ConFactory.fechar(con,ps);
+		}
+	}
+
+
     public FormaPagamento FormaPagamento(double codigo)
 	{
 		Connection con = ConFactory.conectar(0);
@@ -24,13 +45,35 @@ public class DaoFormaPagamento {
 			}   
 		    }
 			catch (SQLException e) {
-			TrataErro.imprimeErro("Erro no SELECT na TFORM_PGMTO", e.getMessage());
+			TrataErro.imprimeErro("Erro no SELECT na TFORM_PGMTO", e);
 			return null;
 		}
 		finally{
 			ConFactory.fechar(con,ps);
 		}
 	}
+
+public double selectMaxFormaPagamento()
+	{
+		Connection con = ConFactory.conectar(0);
+		PreparedStatement ps = null;
+		try {
+			ps = con.prepareStatement("SELECT MAX (CD_FORM_PGMTO) AS MAXIMO FROM TFORM_PGMTO");
+			ResultSet rs = ps.executeQuery();
+			if (rs.next())
+			    return rs.getDouble("MAXIMO");
+			else
+			    return 0;
+		    }
+			catch (SQLException e) {
+			TrataErro.imprimeErro("Erro no SELECT MAX na TFORM_PGMTO", e);
+			return 0;
+		}
+		finally{
+			ConFactory.fechar(con,ps);
+		}
+	}
+
 	
 public FormaPagamento FormaPagamentoNome(String nome)
 	{
@@ -49,7 +92,7 @@ public FormaPagamento FormaPagamentoNome(String nome)
 			}   
 		    }
 			catch (SQLException e) {
-			TrataErro.imprimeErro("Erro no SELECT na TFORM_PGMTO", e.getMessage());
+			TrataErro.imprimeErro("Erro no SELECT na TFORM_PGMTO", e);
 			return null;
 		}
 		finally{
@@ -72,7 +115,7 @@ public ArrayList<FormaPagamento> selectAllFormaPagamento()
 		  return lista;
 		  }
 			catch (SQLException e) {
-			TrataErro.imprimeErro("Erro no SELECT na TFORM_PGMTO", e.getMessage());
+			TrataErro.imprimeErro("Erro no SELECT na TFORM_PGMTO", e);
 			return null;
 		}
 		finally{

@@ -9,13 +9,13 @@ import utilitarios.TrataErro;
 public class DaoVendaProduto {
 
 
-public ArrayList<VendaProduto> selectVendaProduto(int codigo)
+public ArrayList<VendaProduto> selectVendaProduto(double codigo)
 	{
 		Connection con = ConFactory.conectar(0);
 		PreparedStatement ps = null;
 		try {
 			ps = con.prepareStatement("SELECT CD_VENDA, NSEQ_VENDA_PROD, CD_PROD, QTD_PROD, VL_UNIT_PROD FROM TVENDA_PROD WHERE CD_VENDA = ?");
-			ps.setInt(1, codigo);
+			ps.setDouble(1, codigo);
 			ResultSet rs = ps.executeQuery();
 			ArrayList<VendaProduto>  lista = new ArrayList<VendaProduto>();
 			if (rs.next())

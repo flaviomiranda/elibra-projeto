@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * Menu.java
- *
- * Created on Apr 13, 2011, 11:11:54 AM
- */
-
 package telas;
 
 import dao.DaoCategoria;
@@ -17,6 +6,7 @@ import dao.DaoFuncionario;
 import dao.DaoLogin;
 import dao.DaoMarca;
 import dao.DaoProduto;
+import dao.DaoVenda;
 import java.util.ArrayList;
 import java.util.TreeMap;
 import javax.swing.JOptionPane;
@@ -26,14 +16,12 @@ import model.Funcionario;
 import model.Login;
 import model.Marca;
 import model.Produto;
+import model.Venda;
+import relatorios.RelatorioPeriodo;
 import relatorios.RelatorioRelacaoProdutos;
 import utilitarios.Formatador;
 import utilitarios.TrataErro;
 
-/**
- *
- * @author Rafael Fioretti
- */
 public class TelaMenu extends javax.swing.JFrame {
 
     String loginglobal;
@@ -73,12 +61,18 @@ public class TelaMenu extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem13 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
         jMenuItem10 = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
         jMenuItem11 = new javax.swing.JMenuItem();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
         jMenuItem12 = new javax.swing.JMenuItem();
 
         jMenu3.setText("File");
@@ -172,6 +166,15 @@ public class TelaMenu extends javax.swing.JFrame {
             }
         });
         jMenu6.add(jMenuItem7);
+        jMenu6.add(jSeparator7);
+
+        jMenuItem13.setText("Vendas Periodo");
+        jMenuItem13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jMenuItem13MouseReleased(evt);
+            }
+        });
+        jMenu6.add(jMenuItem13);
 
         jMenuBar1.add(jMenu6);
 
@@ -180,12 +183,18 @@ public class TelaMenu extends javax.swing.JFrame {
         jMenu8.setText("Incluir");
 
         jMenuItem9.setText("Categoria");
+        jMenuItem9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jMenuItem9MouseReleased(evt);
+            }
+        });
         jMenuItem9.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jMenuItem9KeyReleased(evt);
             }
         });
         jMenu8.add(jMenuItem9);
+        jMenu8.add(jSeparator3);
 
         jMenuItem8.setText("Forma de Pagamento");
         jMenuItem8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -194,6 +203,7 @@ public class TelaMenu extends javax.swing.JFrame {
             }
         });
         jMenu8.add(jMenuItem8);
+        jMenu8.add(jSeparator4);
 
         jMenuItem10.setText("Marca");
         jMenuItem10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -202,13 +212,17 @@ public class TelaMenu extends javax.swing.JFrame {
             }
         });
         jMenu8.add(jMenuItem10);
+        jMenu8.add(jSeparator5);
 
         jMenuItem11.setText("Motivo Estorno");
+        jMenuItem11.setEnabled(false);
         jMenu8.add(jMenuItem11);
 
         jMenu7.add(jMenu8);
+        jMenu7.add(jSeparator6);
 
         jMenuItem12.setText("Configura Impressão");
+        jMenuItem12.setEnabled(false);
         jMenu7.add(jMenuItem12);
 
         jMenuBar1.add(jMenu7);
@@ -313,7 +327,7 @@ public class TelaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem7MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem7MouseReleased
-        // TODO add your handling code here:
+ 
         if (f.getCD_ACESSO() == 0)
         {
             Exception e = null;
@@ -328,21 +342,6 @@ public class TelaMenu extends javax.swing.JFrame {
 
     private void jMenuItem9KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMenuItem9KeyReleased
 
-         String novacategoria = JOptionPane.showInputDialog(null, "Digite a Nova Categoria a ser Cadastrada", "Cadastro de Nova Categoria", JOptionPane.QUESTION_MESSAGE);
-                if(novacategoria !=null)
-                {
-                    DaoCategoria daocategoria = new DaoCategoria();
-                    Categoria c = daocategoria.selectCategoriaNome(novacategoria.toUpperCase());
-                    if (c != null)
-                    {
-                        JOptionPane.showMessageDialog(null, "Categoria Já Existe");
-                        return;
-                    }
-                    double seq = daocategoria.selectMaxCategoria();
-                    seq = seq + 1;
-                    if (daocategoria.insertCategoria(new Categoria(seq, novacategoria)) == 0)
-                        JOptionPane.showMessageDialog(null, "Categoria Incluida com Sucesso!!");
-                 }
     }//GEN-LAST:event_jMenuItem9KeyReleased
 
     private void jMenuItem10MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem10MouseReleased
@@ -355,10 +354,12 @@ public class TelaMenu extends javax.swing.JFrame {
             arraycateg[x] = listacateg.get(x).getDS_CAT();
                 
         String categsel = (String) JOptionPane.showInputDialog(null, "Selecione em qual categoria será incluida a Marca", "Inclusão Marca", JOptionPane.QUESTION_MESSAGE, null, arraycateg, rootPaneCheckingEnabled) ;
-        Categoria c = mapcateg.get(categsel); 
+        if (categsel == null)
+            return;
+        Categoria c = mapcateg.get(categsel);
         
         String novamarca = JOptionPane.showInputDialog(null, "Digite a Nova Marca a ser Cadastrada", "Cadastro de Nova Marca", JOptionPane.QUESTION_MESSAGE);
-        if(novamarca == null)
+        if(novamarca == null || novamarca.equals(""))
             return;
         DaoMarca daomarca = new DaoMarca();
         Marca m = daomarca.selectMarcaNome(novamarca.toUpperCase(), c.getCD_CAT());
@@ -375,9 +376,8 @@ public class TelaMenu extends javax.swing.JFrame {
     private void jMenuItem8MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem8MouseReleased
         if (f.getCD_ACESSO() == 0)
         {
-            Exception e = null;
             JOptionPane.showMessageDialog(null,"Você não possui acesso, consulte administrador");
-            TrataErro.imprimeErro("O login: " + loginglobal + "tentou acessar a inclusao de forma de pagamento e nao possui acesso", e);
+            return;
         }
         else
         {
@@ -391,8 +391,63 @@ public class TelaMenu extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(null, "Forma de Pagamento Já Existe");
                return;
            }
+            else
+           {
+               double seq = daoformapagamento.selectMaxFormaPagamento();
+               seq++;
+               if (daoformapagamento.insertFormaPagamento(new FormaPagamento(seq, formapgto)) == 0)
+                        JOptionPane.showMessageDialog(null, "Forma de Pagamento Incluida com Sucesso!!");
+            }
         }
     }//GEN-LAST:event_jMenuItem8MouseReleased
+
+    private void jMenuItem13MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem13MouseReleased
+
+        if (f.getCD_ACESSO() == 0)
+        {
+            JOptionPane.showMessageDialog(null,"Você não possui acesso, consulte administrador");
+            return;
+        }
+
+        String dtinicio = JOptionPane.showInputDialog(null, "Digite o Dia Inicial da Pesquisa");
+        if (dtinicio == null || dtinicio.equals(""))
+            return;
+        String dtfim = JOptionPane.showInputDialog(null, "Digite o Dia Final da Pesquisa");
+        if (dtfim == null || dtfim.equals(""))
+            return;
+        //recebe dados a ser pesquisado
+        DaoVenda daovenda = new DaoVenda();
+        ArrayList<Venda> lista = new ArrayList<Venda>();
+        lista = daovenda.selectAllVendaBetweenDate(dtinicio, dtfim);
+        if (lista.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Não Houveram Vendas neste Período");
+            return;
+        }
+        RelatorioPeriodo rp = new RelatorioPeriodo(null, true,lista);
+        rp.setLocationRelativeTo(null);
+        rp.setVisible(true);
+
+    }//GEN-LAST:event_jMenuItem13MouseReleased
+
+    private void jMenuItem9MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem9MouseReleased
+
+         String novacategoria = JOptionPane.showInputDialog(null, "Digite a Nova Categoria a ser Cadastrada", "Cadastro de Nova Categoria", JOptionPane.QUESTION_MESSAGE);
+                if(novacategoria !=null && !novacategoria.equals(""))
+                {
+                    DaoCategoria daocategoria = new DaoCategoria();
+                    Categoria c = daocategoria.selectCategoriaNome(novacategoria.toUpperCase());
+                    if (c != null)
+                    {
+                        JOptionPane.showMessageDialog(null, "Categoria Já Existe");
+                        return;
+                    }
+                    double seq = daocategoria.selectMaxCategoria();
+                    seq = seq + 1;
+                    if (daocategoria.insertCategoria(new Categoria(seq, novacategoria)) == 0)
+                        JOptionPane.showMessageDialog(null, "Categoria Incluida com Sucesso!!");
+                 }
+    }//GEN-LAST:event_jMenuItem9MouseReleased
 
     /**
     * @param args the command line arguments
@@ -422,6 +477,7 @@ public class TelaMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -432,6 +488,11 @@ public class TelaMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JPopupMenu.Separator jSeparator7;
     // End of variables declaration//GEN-END:variables
 
 }
