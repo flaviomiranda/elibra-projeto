@@ -165,8 +165,32 @@ ORA-12519, TNS:no appropriate service handler found
 2011-05-14-03.20.04 - null
 2011-05-14-03.20.04 - class java.sql.SQLException
 
-2011-06-02-09.23.31 - Erro ao conectar
-2011-06-02-09.23.31 - Exceção de E/S: The Network Adapter could not establish the connection
-2011-06-02-09.23.31 - Exceção de E/S: The Network Adapter could not establish the connection
-2011-06-02-09.23.31 - null
-2011-06-02-09.23.31 - class java.sql.SQLException
+2011-05-28-00.56.49 - Erro ao conectar
+2011-05-28-00.56.49 - Io exception: The Network Adapter could not establish the connection
+2011-05-28-00.56.49 - Io exception: The Network Adapter could not establish the connection
+2011-05-28-00.56.49 - null
+2011-05-28-00.56.49 - class java.sql.SQLException
+
+2011-05-28-00.57.17 - Erro ao conectar
+2011-05-28-00.57.17 - Io exception: The Network Adapter could not establish the connection
+2011-05-28-00.57.17 - Io exception: The Network Adapter could not establish the connection
+2011-05-28-00.57.17 - null
+2011-05-28-00.57.17 - class java.sql.SQLException
+
+2011-05-28-01.07.53 - Erro no select na TPRODUTO
+2011-05-28-01.07.53 - ResultSet.next was not called
+
+2011-05-28-01.09.15 - Erro no select na TPRODUTO
+2011-05-28-01.09.15 - ResultSet.next was not called
+
+2011-06-04-00.12.01 - Erro no INSERT na TCATEGORIA
+2011-06-04-00.12.01 - ORA-01400: cannot insert NULL into ("RAFAEL"."TCATEGORIA"."DS_CAT")
+
+2011-06-04-00.12.41 - Erro no INSERT na TCATEGORIA
+2011-06-04-00.12.41 - ORA-01400: cannot insert NULL into ("RAFAEL"."TCATEGORIA"."DS_CAT")
+
+2011-06-04-00.24.21 - Erro no INSERT na TMARCA
+2011-06-04-00.24.21 - ORA-01400: cannot insert NULL into ("RAFAEL"."TMARCA"."NM_MARCA")
+
+2011-06-04-00.31.02 - O login: rafaeltentou acessar a inclusao de forma de pagamento e nao possui acesso
+2011-06-04-00.31.02 - erro

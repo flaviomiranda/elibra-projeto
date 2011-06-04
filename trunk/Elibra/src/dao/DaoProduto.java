@@ -66,9 +66,12 @@ public ArrayList<Produto> selectAllProduto()
 			ps = con.prepareStatement("SELECT CD_PROD, CD_MARCA, CD_BARRA_PROD, NM_PROD, QTD_PROD, VL_PROD, DT_VAL_PROD FROM TPRODUTO ORDER BY NM_PROD");
 			ResultSet rs = ps.executeQuery();
 			ArrayList<Produto> lista = new ArrayList<Produto>();
-			do{
-			    lista.add(new Produto(rs.getDouble(1),rs.getDouble(2),rs.getString(3),rs.getString(4),rs.getDouble(5),rs.getDouble(6),rs.getDate(7)));
-		    }while(rs.next()); 
+			if (rs.next())
+                        {
+                            do{
+                                lista.add(new Produto(rs.getDouble(1),rs.getDouble(2),rs.getString(3),rs.getString(4),rs.getDouble(5),rs.getDouble(6),rs.getDate(7)));
+                              }while(rs.next());
+                        }
 		  return lista;
 		  }
 			catch (SQLException e) {
@@ -79,6 +82,32 @@ public ArrayList<Produto> selectAllProduto()
 			ConFactory.fechar(con,ps);
 		}
 	}
+
+public TreeMap<Double,Produto> selectAllProdutoMap()
+	{
+		Connection con = ConFactory.conectar(0);
+		PreparedStatement ps = null;
+		try {
+			ps = con.prepareStatement("SELECT CD_PROD, CD_MARCA, CD_BARRA_PROD, NM_PROD, QTD_PROD, VL_PROD, DT_VAL_PROD FROM TPRODUTO ORDER BY NM_PROD");
+			ResultSet rs = ps.executeQuery();
+			TreeMap<Double,Produto> mapproduto = new TreeMap<Double,Produto>();
+			if (rs.next())
+                        {
+                            do{
+                                mapproduto.put(rs.getDouble(1),new Produto(rs.getDouble(1),rs.getDouble(2),rs.getString(3),rs.getString(4),rs.getDouble(5),rs.getDouble(6),rs.getDate(7)));
+                              }while(rs.next());
+                        }
+		  return mapproduto;
+		  }
+			catch (SQLException e) {
+			TrataErro.imprimeErro("Erro no select na TPRODUTO", e.getMessage());
+			return null;
+		}
+		finally{
+			ConFactory.fechar(con,ps);
+		}
+	}
+
 
 public double selectMaxProduto()
 	{
@@ -189,9 +218,12 @@ public ArrayList<Produto> selectAllProdutoDescricao(String descricao)
 			ps.setString(1, "%"+descricao+"%");
 			ResultSet rs = ps.executeQuery();
 			ArrayList<Produto> lista = new ArrayList<Produto>();
-			do{
+			if (rs.next())
+                        {
+                            do {
 			    lista.add(new Produto(rs.getDouble(1),rs.getDouble(2),rs.getString(3),rs.getString(4),rs.getDouble(5),rs.getDouble(6),rs.getDate(7)));
-		    }while(rs.next()); 
+                                }while(rs.next());
+                        }
 		  return lista;
 		  }
 			catch (SQLException e) {
