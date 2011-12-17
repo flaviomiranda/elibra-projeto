@@ -13,6 +13,14 @@ public class TrataErro {
 		      JOptionPane.showMessageDialog(null, "Ocorreu um Erro, entre em contato com o Administrador", "Erro crítico", 0);
 		      System.exit(0);   
    }
+      public static void imprimeErro(String msg) {
+		      System.err.println(msg);
+		      ArquivoLog al = new ArquivoLog();
+		      al.GravaLog(msg, msg);
+
+		      JOptionPane.showMessageDialog(null, "Ocorreu um Erro, entre em contato com o Administrador", "Erro crítico", 0);
+		      System.exit(0);
+   }
    public static void imprimeErro(String msg, Exception e) {
 		      System.err.println(msg);
 		      ArquivoLog al = new ArquivoLog();

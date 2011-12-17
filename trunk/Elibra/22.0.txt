@@ -1,0 +1,22 @@
+
+ELIBRA COMERCIO DE SALVADOS LTDA
+AV. BOTUQUARA, 245 CEP:04135-20
+BOSQUE DA SAUDE - SAO PAULO-SP TEL:(11)3571-0500
+------------------------------------------------
+12/12/2011 22:26:39                   COD:000022
+------------------------------------------------
+ITEM CODIGO         DESCRICAO
+QTD.     UN      VL.UNIT.(R$)       VL.ITEM(R$)
+------------------------------------------------
+001  1              Produto 1                   
+   5,000 UND x          4,40               22,00
+002  2              Produto 2                   
+   1,000 UND x          5,40                5,40
+003  1              Produto 1                   
+   1,000 UND x          4,40                4,40
+------------------------------------------------
+TOTAL                                R$ 31,80
+FORMA DE PAGAMENTO: CHEQUE
+OPERADOR: RAFAEL
+------------------------------------------------
+ESTE CUPOM NAO POSSUI VALOR FISCAL

@@ -23,6 +23,7 @@ import model.Produto;
 import model.Venda;
 import model.VendaProduto;
 import utilitarios.Formatador;
+import utilitarios.ImprimirCupom;
 import utilitarios.TrataErro;
 
 public class TelaCaixa extends javax.swing.JDialog {
@@ -124,7 +125,7 @@ public class TelaCaixa extends javax.swing.JDialog {
         if (txtdesconto.equals(""))
             return;
         //txtdesconto.replace("%", "0");
-        txtdesconto.replace(",", ".");
+        txtdesconto = txtdesconto.replaceAll(",", ".");
         double desconto = Double.parseDouble(txtdesconto);
         valordesconto = desconto;
         reMontaNota();
@@ -243,22 +244,23 @@ public class TelaCaixa extends javax.swing.JDialog {
             String dinreceb = JOptionPane.showInputDialog(null, "Informe o Dinheiro Recebido", "Valor Recebido", JOptionPane.QUESTION_MESSAGE);
             if (dinreceb == null || dinreceb.equals("") || dinreceb.equals("0"))
                 return;
-            dinreceb.replace(",", ".");
+            dinreceb = dinreceb.replaceAll(",", ".");
             double dinrecebido = Double.parseDouble(dinreceb);
-            if (dinrecebido < totalgeral)
+            if (dinrecebido < (totalgeral - valordesconto))
             {
                 JOptionPane.showMessageDialog(null, "Valor recebido é menor que valor a ser pago");
                 return;
             }
             else{
-                double troco = dinrecebido - totalgeral ;
+                double troco = dinrecebido - (totalgeral - valordesconto);
                 String trocotxt = Formatador.formataVirgula2(troco);
                 JOptionPane.showMessageDialog(null, "O troco a ser devolvido é de: R$"+ trocotxt, "Troco", JOptionPane.PLAIN_MESSAGE);
             }
 
 
         }
-        daovenda.insertVenda(new Venda(cdvenda, cdformapagamento, login.getCD_FUNC(), 0,valordesconto, null));
+        Venda v = new Venda(cdvenda, cdformapagamento, login.getCD_FUNC(), 0,valordesconto, null);
+        daovenda.insertVenda(v);
         for(int x=0; x < itenscarrinho.size(); x++)
         {
             DaoVendaProduto daovendaproduto = new DaoVendaProduto();
@@ -270,8 +272,15 @@ public class TelaCaixa extends javax.swing.JDialog {
             p.setQTD_PROD(qtdatual - cc.getQuantidade());
             daoproduto.updateProduto(p);
         }
-        novavenda();
+        imprimirCupom(v);
         JOptionPane.showMessageDialog(null, "Venda Realizada com Sucesso!");
+        novavenda();
+    }
+
+    public void imprimirCupom(Venda v)
+    {
+        ImprimirCupom ic = new ImprimirCupom();
+        ic.iniciarImpressao(v);
     }
 
     public void novavenda()
@@ -532,7 +541,7 @@ public class TelaCaixa extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 2, 30));
-        jLabel9.setText("Elibra Comércio de Salvados de Sinistro e LTDA");
+        jLabel9.setText("Elibra Comércio de Salvados de Sinistro LTDA");
 
         jLabel1.setText("Operador: ");
 
@@ -617,7 +626,7 @@ public class TelaCaixa extends javax.swing.JDialog {
         txtNotaFiscal.setFont(new java.awt.Font("Courier New", 1, 14));
         txtNotaFiscal.setRows(23);
         txtNotaFiscal.setAutoscrolls(false);
-        txtNotaFiscal.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtNotaFiscal.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtNotaFiscal.setFocusable(false);
         jScrollPane1.setViewportView(txtNotaFiscal);
 
@@ -659,9 +668,7 @@ public class TelaCaixa extends javax.swing.JDialog {
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(22, 22, 22)
                                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addComponent(txtSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(txtSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel6)

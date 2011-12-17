@@ -16,12 +16,12 @@ public Marca selectMarca(double codigo)
 		Connection con = ConFactory.conectar(0);
 		PreparedStatement ps = null;
 		try {
-			ps = con.prepareStatement("SELECT CD_MARCA, CD_CAT, NM_MARCA FROM TMARCA WHERE CD_MARCA = ?");
+			ps = con.prepareStatement("SELECT CD_MARCA, NM_MARCA FROM TMARCA WHERE CD_MARCA = ?");
 			ps.setDouble(1, codigo);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next())
 			{
-			    return new Marca(rs.getDouble(1),rs.getDouble(2),rs.getString(3));
+			    return new Marca(rs.getDouble(1),rs.getString(2));
 			}else
 			{
 			    return null;
@@ -36,18 +36,17 @@ public Marca selectMarca(double codigo)
 		}
 	}
 
-public Marca selectMarcaNome(String nome, double categoria)
+public Marca selectMarcaNome(String nome)
 	{
 		Connection con = ConFactory.conectar(0);
 		PreparedStatement ps = null;
 		try {
-			ps = con.prepareStatement("SELECT CD_MARCA, CD_CAT, NM_MARCA FROM TMARCA WHERE CD_CAT = ? AND UPPER(NM_MARCA) LIKE ?");
-			ps.setDouble(1, categoria);
-                        ps.setString(2, nome);
+			ps = con.prepareStatement("SELECT CD_MARCA, NM_MARCA FROM TMARCA WHERE UPPER(NM_MARCA) LIKE ?");
+                        ps.setString(1, nome);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next())
 			{
-			    return new Marca(rs.getDouble(1),rs.getDouble(2),rs.getString(3));
+			    return new Marca(rs.getDouble(1),rs.getString(2));
 			}else
 			{
 			    return null;
@@ -62,18 +61,17 @@ public Marca selectMarcaNome(String nome, double categoria)
 		}
 	}
 	
-public ArrayList<Marca> selectAllMarca(double categoria)
+public ArrayList<Marca> selectAllMarca()
 	{
 		Connection con = ConFactory.conectar(0);
 		PreparedStatement ps = null;
 		try {
-			ps = con.prepareStatement("SELECT CD_MARCA, NM_MARCA FROM TMARCA WHERE CD_CAT = ? ORDER BY NM_MARCA");
-			ps.setDouble(1, categoria);
+			ps = con.prepareStatement("SELECT CD_MARCA, NM_MARCA FROM TMARCA ORDER BY NM_MARCA");
                         ResultSet rs = ps.executeQuery();
 			ArrayList<Marca> lista = new ArrayList<Marca>();
 			if(rs.next()){
                         do{
-			    lista.add(new Marca(rs.getDouble(1),categoria,rs.getString(2)));
+			    lista.add(new Marca(rs.getDouble(1),rs.getString(2)));
 		    }while(rs.next()); }
 		  return lista;
 		  }
@@ -86,18 +84,17 @@ public ArrayList<Marca> selectAllMarca(double categoria)
 		}
 	}
 
-public Map<String,Marca> selectAllMarcaMap(double categoria)
+public Map<String,Marca> selectAllMarcaMap()
 	{
 		Connection con = ConFactory.conectar(0);
 		PreparedStatement ps = null;
 		try {
-			ps = con.prepareStatement("SELECT CD_MARCA, NM_MARCA FROM TMARCA WHERE CD_CAT = ? ORDER BY NM_MARCA");
-			ps.setDouble(1, categoria);
+			ps = con.prepareStatement("SELECT CD_MARCA, NM_MARCA FROM TMARCA ORDER BY NM_MARCA");
                         ResultSet rs = ps.executeQuery();
 			Map<String,Marca> map = new TreeMap<String,Marca>();
 			if(rs.next()){
                         do{
-			    map.put(rs.getString(2), new Marca(rs.getDouble(1),categoria,rs.getString(2)));
+			    map.put(rs.getString(2), new Marca(rs.getDouble(1),rs.getString(2)));
 		    }while(rs.next()); }
 		  return map;
 		  }
@@ -110,17 +107,17 @@ public Map<String,Marca> selectAllMarcaMap(double categoria)
 		}
 	}
 
-public Map<Integer,Marca> selectAllMarcaMap()
+public Map<Integer,Marca> selectAllMarcaMapCod()
 {
 	Connection con = ConFactory.conectar(0);
 	PreparedStatement ps = null;
 	try {
-		ps = con.prepareStatement("SELECT CD_MARCA, CD_CAT, NM_MARCA FROM TMARCA ORDER BY CD_MARCA");
+		ps = con.prepareStatement("SELECT CD_MARCA, NM_MARCA FROM TMARCA ORDER BY CD_MARCA");
 		ResultSet rs = ps.executeQuery();
 		Map<Integer,Marca> map = new TreeMap<Integer,Marca>();
 		if(rs.next()){
                     do{
-		    map.put((int)rs.getDouble(1), new Marca(rs.getDouble(1),rs.getDouble(2),rs.getString(3)));
+		    map.put((int)rs.getDouble(1), new Marca(rs.getDouble(1),rs.getString(2)));
 	    }while(rs.next()); }
 	  return map;
 	  }
@@ -159,10 +156,9 @@ public int InsertMarca(Marca m)
 		Connection con = ConFactory.conectar(0);
 		PreparedStatement ps = null;
 		try {
-			ps = con.prepareStatement("INSERT INTO TMARCA VALUES (?, ?, ?)");
+			ps = con.prepareStatement("INSERT INTO TMARCA VALUES (?, ?)");
 			ps.setDouble(1, m.getCD_MARCA());
-			ps.setDouble(2, m.getCD_CAT());
-			ps.setString(3, m.getNM_MARCA());
+			ps.setString(2, m.getNM_MARCA());
                         ps.executeUpdate();
 			return 0;                  
 			  }

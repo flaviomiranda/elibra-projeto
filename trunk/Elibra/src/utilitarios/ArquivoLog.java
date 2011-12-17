@@ -1,6 +1,7 @@
 package utilitarios;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class ArquivoLog {
         arqlog += System.getProperty("line.separator") + timestamp + " - " + msgerro;
 
         try {
-            FileWriter fw = new FileWriter(nomeArquivo);
+            FileWriter fw = new FileWriter(new File("./log/"+nomeArquivo));
             fw.write(arqlog);
             fw.close();
         }
