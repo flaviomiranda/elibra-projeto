@@ -253,9 +253,12 @@ public class TelaCaixa extends javax.swing.JDialog {
             }
             else{
                 double troco = dinrecebido - (totalgeral - valordesconto);
+                if (troco != 0)
+                    {
                 String trocotxt = Formatador.formataVirgula2(troco);
                 JOptionPane.showMessageDialog(null, "O troco a ser devolvido é de: R$"+ trocotxt, "Troco", JOptionPane.PLAIN_MESSAGE);
-            }
+                    }
+                }
 
 
         }

@@ -160,6 +160,7 @@ public class TelaMenu extends javax.swing.JFrame {
         jMenu6.setText("Relatórios");
 
         jMenuItem7.setText("Relação de Produtos");
+        jMenuItem7.setEnabled(false);
         jMenuItem7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jMenuItem7MouseReleased(evt);
@@ -328,7 +329,7 @@ public class TelaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem7MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem7MouseReleased
- 
+ /*
         if (f.getCD_ACESSO() == 0)
         {
             Exception e = null;
@@ -338,7 +339,7 @@ public class TelaMenu extends javax.swing.JFrame {
         RelatorioRelacaoProdutos rrp = new RelatorioRelacaoProdutos(null, true);
         rrp.setLocationRelativeTo(null);
         rrp.setVisible(true);
-        
+   */     
     }//GEN-LAST:event_jMenuItem7MouseReleased
 
     private void jMenuItem9KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMenuItem9KeyReleased
@@ -403,7 +404,7 @@ public class TelaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8MouseReleased
 
     private void jMenuItem13MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem13MouseReleased
-
+/*
         if (f.getCD_ACESSO() == 0)
         {
             JOptionPane.showMessageDialog(null,"Você não possui acesso, consulte administrador");
@@ -428,7 +429,7 @@ public class TelaMenu extends javax.swing.JFrame {
         RelatorioPeriodo rp = new RelatorioPeriodo(null, true,lista);
         rp.setLocationRelativeTo(null);
         rp.setVisible(true);
-
+*/
     }//GEN-LAST:event_jMenuItem13MouseReleased
 
     private void jMenuItem9MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem9MouseReleased
