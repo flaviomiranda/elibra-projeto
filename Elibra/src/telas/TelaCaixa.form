@@ -330,7 +330,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="30" style="2"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Elibra Com&#xe9;rcio de Salvados de Sinistro e LTDA"/>
+            <Property name="text" type="java.lang.String" value="Elibra Com&#xe9;rcio de Salvados de Sinistro LTDA"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">

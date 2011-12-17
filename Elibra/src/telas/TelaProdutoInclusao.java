@@ -56,7 +56,8 @@ public class TelaProdutoInclusao extends javax.swing.JDialog {
                 }}
             }
             );
-        preencherCbbCategoria();   
+        preencherCbbCategoria();
+        preencherCbbMarca();
     }
 
     public void preencherCbbCategoria()
@@ -79,10 +80,10 @@ public class TelaProdutoInclusao extends javax.swing.JDialog {
         return mapcategoria.get(cbbCategoria.getSelectedItem().toString());
     }
 
-    public void preencherCbbMarca(double categoria)
+    public void preencherCbbMarca()
     {
         DaoMarca daomarca = new DaoMarca();
-        ArrayList<Marca> almarca = daomarca.selectAllMarca(categoria);
+        ArrayList<Marca> almarca = daomarca.selectAllMarca();
         cbbMarca.removeAllItems();
         cbbMarca.addItem("Selecionar...");
         for(int k =0;k <almarca.size();k++)
@@ -95,7 +96,7 @@ public class TelaProdutoInclusao extends javax.swing.JDialog {
     public Marca obtemMarcaSelecionada(double categoria)
     {
         DaoMarca daomarca = new DaoMarca();
-        TreeMap<String, Marca> mapmarca = (TreeMap<String, Marca>) daomarca.selectAllMarcaMap(categoria);
+        TreeMap<String, Marca> mapmarca = (TreeMap<String, Marca>) daomarca.selectAllMarcaMap();
         return mapmarca.get(cbbMarca.getSelectedItem().toString());
     }
 
@@ -401,7 +402,7 @@ public class TelaProdutoInclusao extends javax.swing.JDialog {
                     }
                     double seq = daoproduto.selectMaxProduto();
                     seq ++;
-                    daoproduto.insertProduto(new Produto(seq, marca, codigobarras,descricao, quantidade, valorunitario, dtvalidade ));
+                    daoproduto.insertProduto(new Produto(seq, categoria, marca, codigobarras,descricao, quantidade, valorunitario, dtvalidade ));
                     JOptionPane.showMessageDialog(null, "Produto Cadastrado com Sucesso!");
                     dispose();
                    }
@@ -446,13 +447,9 @@ public class TelaProdutoInclusao extends javax.swing.JDialog {
                     preencherCbbCategoria();
                  }
             }
-                 Categoria c = obtemCategoriaSelecionada();
-                 preencherCbbMarca(c.getCD_CAT());
+
         }
-        else{
-                cbbMarca.removeAllItems();
-                cbbMarca.addItem("Selecionar...");
-        }
+
     }//GEN-LAST:event_cbbCategoriaItemStateChanged
 
     private void cbbMarcaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbMarcaItemStateChanged
@@ -473,18 +470,18 @@ public class TelaProdutoInclusao extends javax.swing.JDialog {
                 if(novamarca !=null)
                 {
                     DaoMarca daomarca = new DaoMarca();
-                    Categoria c = obtemCategoriaSelecionada();
-                    Marca m = daomarca.selectMarcaNome(novamarca.toUpperCase(), c.getCD_CAT());
-                    if (c != null)
+                    Marca m = daomarca.selectMarcaNome(novamarca.toUpperCase());
+                    if (m !=null)
                     {
                         JOptionPane.showMessageDialog(null, "Marca Já Existe");
+                        return;
                     }
                     double seq = daomarca.selectMaxMarca();
                     seq = seq + 1;
                     
-                    if (daomarca.InsertMarca(new Marca(seq,c.getCD_CAT(), novamarca)) == 0)
+                    if (daomarca.InsertMarca(new Marca(seq, novamarca)) == 0)
                         JOptionPane.showMessageDialog(null, "Marca Incluida com Sucesso!!");
-                        preencherCbbMarca(c.getCD_CAT());
+                        preencherCbbMarca();
                  }
             }
               

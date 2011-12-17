@@ -22,6 +22,7 @@ public class TelaProdutoConsulta extends javax.swing.JDialog {
         initComponents();
         btnConfirmar.setVisible(false);
         preencherCbbCategoria();
+        preencherCbbMarca();
         carregaConsulta(p);
     }
 
@@ -35,7 +36,7 @@ public class TelaProdutoConsulta extends javax.swing.JDialog {
          DaoMarca daomarca = new DaoMarca();
          Marca m = daomarca.selectMarca(p.getCD_MARCA());
          DaoCategoria daocategoria = new DaoCategoria();
-         Categoria c = daocategoria.selectCategoria(m.getCD_CAT());
+         Categoria c = daocategoria.selectCategoria(p.getCD_CAT());
          cbbCategoria.setSelectedItem(c.getDS_CAT());
          cbbMarca.setSelectedItem(m.getNM_MARCA());
          Date dtvalidade = p.getDT_VAL_PROD();
@@ -67,10 +68,10 @@ public class TelaProdutoConsulta extends javax.swing.JDialog {
         return mapcategoria.get(cbbCategoria.getSelectedItem().toString());
     }
 
-    public void preencherCbbMarca(double categoria)
+    public void preencherCbbMarca()
     {
         DaoMarca daomarca = new DaoMarca();
-        ArrayList<Marca> almarca = daomarca.selectAllMarca(categoria);
+        ArrayList<Marca> almarca = daomarca.selectAllMarca();
         cbbMarca.removeAllItems();
         cbbMarca.addItem("Selecionar...");
         for(int k =0;k <almarca.size();k++)
@@ -80,10 +81,10 @@ public class TelaProdutoConsulta extends javax.swing.JDialog {
         cbbMarca.addItem("<Cadastrar Nova Marca>");
     }
     
-    public Marca obtemMarcaSelecionada(double categoria)
+    public Marca obtemMarcaSelecionada()
     {
         DaoMarca daomarca = new DaoMarca();
-        TreeMap<String, Marca> mapmarca = (TreeMap<String, Marca>) daomarca.selectAllMarcaMap(categoria);
+        TreeMap<String, Marca> mapmarca = (TreeMap<String, Marca>) daomarca.selectAllMarcaMap();
         return mapmarca.get(cbbMarca.getSelectedItem().toString());
     }
 
@@ -366,12 +367,7 @@ public class TelaProdutoConsulta extends javax.swing.JDialog {
                     preencherCbbCategoria();
                  }
             }
-                 Categoria c = obtemCategoriaSelecionada();
-                 preencherCbbMarca(c.getCD_CAT());
-        }
-        else{
-                cbbMarca.removeAllItems();
-                cbbMarca.addItem("Selecionar...");
+                 
         }
     }//GEN-LAST:event_cbbCategoriaItemStateChanged
 
@@ -391,12 +387,17 @@ public class TelaProdutoConsulta extends javax.swing.JDialog {
                 if(novamarca !=null)
                 {
                     DaoMarca daomarca = new DaoMarca();
+                    Marca m = daomarca.selectMarcaNome(novamarca.toUpperCase());
+                    if (m !=null)
+                    {
+                        JOptionPane.showMessageDialog(null, "Marca Já Existe");
+                        return;
+                    }
                     double seq = daomarca.selectMaxMarca();
                     seq = seq + 1;
-                    Categoria c = obtemCategoriaSelecionada();
-                    if (daomarca.InsertMarca(new Marca(seq,c.getCD_CAT(), novamarca)) == 0)
+                    if (daomarca.InsertMarca(new Marca(seq, novamarca)) == 0)
                         JOptionPane.showMessageDialog(null, "Marca Incluida com Sucesso!!");
-                        preencherCbbMarca(c.getCD_CAT());
+                        preencherCbbMarca();
                  }
             }
               
@@ -433,7 +434,7 @@ public class TelaProdutoConsulta extends javax.swing.JDialog {
                     String codigobarras = txtCodigoBarras.getText();
                     String descricao = txtDescricao.getText();
                     double categoria = obtemCategoriaSelecionada().getCD_CAT();
-                    double marca = obtemMarcaSelecionada(categoria).getCD_MARCA();
+                    double marca = obtemMarcaSelecionada().getCD_MARCA();
                     String valorunitariotxt = txtValorUnitario.getText();
                     valorunitariotxt = valorunitariotxt.replaceAll(",", ".");
                     double valorunitario = Double.parseDouble(valorunitariotxt);
@@ -450,11 +451,11 @@ public class TelaProdutoConsulta extends javax.swing.JDialog {
                     }
                     DaoProduto daoproduto = new DaoProduto();
                     Produto p = daoproduto.selectCodigoBarraProduto(codigobarras);
-                    daoproduto.updateProduto(new Produto(p.getCD_PROD(), marca, codigobarras,descricao, quantidade, valorunitario, dtvalidade ));
+                    daoproduto.updateProduto(new Produto(p.getCD_PROD(),categoria, marca, codigobarras,descricao, quantidade, valorunitario, dtvalidade ));
                     JOptionPane.showMessageDialog(null, "Produto Alterado com Sucesso!");
                     dispose();
                    }
-                 }
+                  }
                 }
                }
               }

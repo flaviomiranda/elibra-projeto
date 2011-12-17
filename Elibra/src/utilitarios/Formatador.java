@@ -4,6 +4,9 @@ package utilitarios;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class Formatador {
    
@@ -44,6 +47,13 @@ public class Formatador {
     String s = formatter.format(valor);
     return s;
     }
+
+    public static String zerosEsquerda6(int valor) {
+    NumberFormat formatter = new DecimalFormat("000000");
+    String s = formatter.format(valor);
+    return s;
+    }
+
     public static String brancosEsquerda(int valor) {
     NumberFormat formatter = new DecimalFormat("####");
     String s = formatter.format(valor);
@@ -63,10 +73,16 @@ public class Formatador {
 
    public static String tamanhoDe(String valor, int qtd)
     {
+       if (valor.length() > qtd)
+       {
+           return valor.substring(0, qtd);
+       }else{
+
        do{
          valor+=" ";
        }while(valor.length() < qtd);
        return valor;
+        }
    }
 
    public static String tamanhoDeEsquerda(String valor, int qtd)
@@ -80,5 +96,26 @@ public class Formatador {
        aux+=valor;
        return aux;
    }
+
+   public static String obtemHoraFormatada(int i)
+    {
+       // 1 = DATA
+       // 2 = HORA
+       String txt="";
+        Locale locale = new Locale("pt","BR");
+        GregorianCalendar calendar = new GregorianCalendar();
+        if (i == 1){
+        SimpleDateFormat formatador = new SimpleDateFormat("dd'/'MM'/'yyyy",locale);
+        txt = formatador.format(calendar.getTime());
+        }
+        else{if( i==2){
+             SimpleDateFormat formatador = new SimpleDateFormat("HH':'mm':'ss",locale);
+             txt = formatador.format(calendar.getTime());
+            }
+
+        }
+        return txt;
+    }
+
 
 }

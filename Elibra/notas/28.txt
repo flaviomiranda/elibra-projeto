@@ -1,0 +1,22 @@
+
+ELIBRA COMERCIO DE SALVADOS DE SINISTRO LTDA
+AV. BOTUQUARA, 245 CEP:04135-20
+BOSQUE DA SAUDE - SAO PAULO-SP TEL:(11)3571-0500
+------------------------------------------------
+16/12/2011 23:44:14                   COD:000028
+------------------------------------------------
+ITEM CODIGO         DESCRICAO
+QTD.     UN      VL.UNIT.(R$)       VL.ITEM(R$)
+------------------------------------------------
+001  4005808239597   Bloqueador Solar Facial Ligh
+   5,000 UND x         18,00               90,00
+002  7891033147809   Desodorante Quasar 100ml    
+   1,000 UND x         17,90               17,90
+------------------------------------------------
+TOTAL                                R$ 107,90
+DESCONTO                             R$ 7,50
+TOTAL COM DESCONTO         R$ 100,40
+FORMA DE PAGAMENTO: DINHEIRO
+OPERADOR: RAFAEL
+------------------------------------------------
+ESTE CUPOM NAO POSSUI VALOR FISCAL

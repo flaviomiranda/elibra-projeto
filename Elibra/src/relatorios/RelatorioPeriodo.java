@@ -156,7 +156,7 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
                 VendaProduto vp = listavendaproduto.get(y);
                 Produto p = mapproduto.get(vp.getCD_PROD());
                 Marca m = mapmarca.get((int)p.getCD_MARCA());
-    		Categoria c = mapcateg.get((int)m.getCD_CAT());
+    		Categoria c = mapcateg.get((int)p.getCD_CAT());
             Date dtvalidade = p.getDT_VAL_PROD();
             String dtvalidadetxt="";
             if (dtvalidade != null){

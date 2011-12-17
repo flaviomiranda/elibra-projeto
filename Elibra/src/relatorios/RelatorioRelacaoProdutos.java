@@ -141,14 +141,14 @@ public class RelatorioRelacaoProdutos extends javax.swing.JDialog {
     	DaoMarca daomarca = new DaoMarca();
     	DaoProduto daoproduto = new DaoProduto();
     	TreeMap<Integer,Categoria> mapcateg = (TreeMap) daocategoria.selectAllCategoriaMapCod();
-    	TreeMap<Integer,Marca> mapmarca = (TreeMap) daomarca.selectAllMarcaMap();
+    	TreeMap<Integer,Marca> mapmarca = (TreeMap) daomarca.selectAllMarcaMapCod();
     	ArrayList<Produto> listaproduto = daoproduto.selectAllProduto();
     	String det="";
     	for(int x=0;x<listaproduto.size(); x++)
     	{
     		Produto p = listaproduto.get(x);
     		Marca m = mapmarca.get((int)p.getCD_MARCA());
-    		Categoria c = mapcateg.get((int)m.getCD_CAT());
+    		Categoria c = mapcateg.get((int)p.getCD_CAT());
             Date dtvalidade = p.getDT_VAL_PROD();
             String dtvalidadetxt="";
             if (dtvalidade != null){

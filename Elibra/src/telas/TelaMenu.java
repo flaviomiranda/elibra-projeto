@@ -169,6 +169,7 @@ public class TelaMenu extends javax.swing.JFrame {
         jMenu6.add(jSeparator7);
 
         jMenuItem13.setText("Vendas Periodo");
+        jMenuItem13.setEnabled(false);
         jMenuItem13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jMenuItem13MouseReleased(evt);
@@ -346,30 +347,30 @@ public class TelaMenu extends javax.swing.JFrame {
 
     private void jMenuItem10MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem10MouseReleased
 
-        DaoCategoria daocategoria = new DaoCategoria();
-        TreeMap<String, Categoria> mapcateg = (TreeMap) daocategoria.selectAllCategoriaMap();
-        ArrayList<Categoria> listacateg = daocategoria.selectAllCategoria();
-        String arraycateg[] = new String[listacateg.size()];
-        for(int x=0; x<listacateg.size(); x++)
-            arraycateg[x] = listacateg.get(x).getDS_CAT();
-                
-        String categsel = (String) JOptionPane.showInputDialog(null, "Selecione em qual categoria será incluida a Marca", "Inclusão Marca", JOptionPane.QUESTION_MESSAGE, null, arraycateg, rootPaneCheckingEnabled) ;
-        if (categsel == null)
-            return;
-        Categoria c = mapcateg.get(categsel);
+//        DaoCategoria daocategoria = new DaoCategoria();
+//        TreeMap<String, Categoria> mapcateg = (TreeMap) daocategoria.selectAllCategoriaMap();
+//        ArrayList<Categoria> listacateg = daocategoria.selectAllCategoria();
+//        String arraycateg[] = new String[listacateg.size()];
+//        for(int x=0; x<listacateg.size(); x++)
+//            arraycateg[x] = listacateg.get(x).getDS_CAT();
+//
+//        String categsel = (String) JOptionPane.showInputDialog(null, "Selecione em qual categoria será incluida a Marca", "Inclusão Marca", JOptionPane.QUESTION_MESSAGE, null, arraycateg, rootPaneCheckingEnabled) ;
+//        if (categsel == null)
+//            return;
+//        Categoria c = mapcateg.get(categsel);
         
         String novamarca = JOptionPane.showInputDialog(null, "Digite a Nova Marca a ser Cadastrada", "Cadastro de Nova Marca", JOptionPane.QUESTION_MESSAGE);
         if(novamarca == null || novamarca.equals(""))
             return;
         DaoMarca daomarca = new DaoMarca();
-        Marca m = daomarca.selectMarcaNome(novamarca.toUpperCase(), c.getCD_CAT());
-        if (c != null)
+        Marca m = daomarca.selectMarcaNome(novamarca.toUpperCase());
+        if (m != null)
         {
             JOptionPane.showMessageDialog(null, "Marca Já Existe");
         }
         double seq = daomarca.selectMaxMarca();
         seq = seq + 1;       
-        if (daomarca.InsertMarca(new Marca(seq,c.getCD_CAT(), novamarca)) == 0)
+        if (daomarca.InsertMarca(new Marca(seq, novamarca)) == 0)
             JOptionPane.showMessageDialog(null, "Marca Incluida com Sucesso!!");    
     }//GEN-LAST:event_jMenuItem10MouseReleased
 
