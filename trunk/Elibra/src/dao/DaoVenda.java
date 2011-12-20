@@ -14,12 +14,12 @@ public Venda selectVenda(int codigo)
 		Connection con = ConFactory.conectar(0);
 		PreparedStatement ps = null;
 		try {
-			ps = con.prepareStatement("SELECT CD_VENDA, CD_FORM_PGMTO, CD_FUNC, CD_CLI, VL_DESCONTO, HR_VENDA FROM TVENDA WHERE CD_VENDA = ?");
+			ps = con.prepareStatement("SELECT CD_VENDA, CD_FORM_PGMTO, CD_FUNC, CD_CLI, VL_DESCONTO, HR_VENDA, QTD_PARCELA FROM TVENDA WHERE CD_VENDA = ?");
 			ps.setInt(1, codigo);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next())
 			{
-			    return new Venda(rs.getDouble(1),rs.getDouble(2),rs.getDouble(3),rs.getDouble(4),rs.getDouble(5), rs.getString(6));
+			    return new Venda(rs.getDouble(1),rs.getDouble(2),rs.getDouble(3),rs.getDouble(4),rs.getDouble(5), rs.getString(6), rs.getDouble(7));
 			}else
 			{
 			    return null;
@@ -60,7 +60,7 @@ public int insertVenda(Venda v)
 		Connection con = ConFactory.conectar(0);
 		PreparedStatement ps = null;
 		try {
-			ps = con.prepareStatement("INSERT INTO TVENDA(CD_VENDA, CD_FORM_PGMTO, CD_FUNC, CD_CLI, VL_DESCONTO, HR_VENDA) VALUES (?,?,?,?,?,CURRENT_TIMESTAMP)");
+			ps = con.prepareStatement("INSERT INTO TVENDA(CD_VENDA, CD_FORM_PGMTO, CD_FUNC, CD_CLI, VL_DESCONTO, HR_VENDA, QTD_PARCELA) VALUES (?,?,?,?,?,CURRENT_TIMESTAMP, ?)");
 
 
 			ps.setDouble(1, v.getCD_VENDA());
@@ -71,6 +71,7 @@ public int insertVenda(Venda v)
                         //ps.setDouble(4, 1);
 			ps.setDouble(5, v.getVL_DESC());
                         //ps.setString(6, v.getHR_VENDA());
+                        ps.setDouble(6, v.getQTD_PARCELA());
 			ps.executeUpdate();
 			return 0;                  
 	           }
@@ -88,7 +89,7 @@ public ArrayList<Venda> selectAllVendaBetweenDate (String dtinicio, String dtfim
 		Connection con = ConFactory.conectar(0);
 		PreparedStatement ps = null;
 		try {
-			ps = con.prepareStatement("SELECT CD_VENDA, CD_FORM_PGMTO, CD_FUNC, CD_CLI, VL_DESCONTO, HR_VENDA FROM TVENDA WHERE HR_VENDA >= ? AND HR_VENDA <= ?");
+			ps = con.prepareStatement("SELECT CD_VENDA, CD_FORM_PGMTO, CD_FUNC, CD_CLI, VL_DESCONTO, HR_VENDA, QTD_PARCELA FROM TVENDA WHERE HR_VENDA >= ? AND HR_VENDA <= ?");
 			ps.setString(1, dtinicio);
                         ps.setString(2, dtfim);
 			ArrayList<Venda> lista = new ArrayList<Venda>();
@@ -97,7 +98,7 @@ public ArrayList<Venda> selectAllVendaBetweenDate (String dtinicio, String dtfim
 			{
 
                             do{
-                                lista.add(new Venda(rs.getDouble(1),rs.getDouble(2),rs.getDouble(3),rs.getDouble(4),rs.getDouble(5), rs.getString(6)));
+                                lista.add(new Venda(rs.getDouble(1),rs.getDouble(2),rs.getDouble(3),rs.getDouble(4),rs.getDouble(5), rs.getString(6), rs.getDouble(7)));
                             }while(rs.next() );
                             return lista;
 			}else

@@ -1,4 +1,4 @@
-package telas;
+    package telas;
 
 import dao.DaoFormaPagamento;
 import dao.DaoFuncionario;
@@ -107,7 +107,16 @@ public class TelaCaixa extends javax.swing.JDialog {
                            catch (IOException iox) {
                                     TrataErro.imprimeErro("Erro ao abrir Calculadora", iox.getMessage());
                          }
+                         break;
                      }
+                     case KeyEvent.VK_F8:
+                     {
+                         TelaProdutoInclusao l = new TelaProdutoInclusao(null, true);
+                         l.setLocationRelativeTo(null);
+                         l.setVisible(true);
+                         break;
+                     }
+                         
 
                 }
 
@@ -238,6 +247,7 @@ public class TelaCaixa extends javax.swing.JDialog {
         DaoVenda daovenda = new DaoVenda();
         double cdvenda = daovenda.selectMaxVenda();
         cdvenda ++;
+        double qtdparcelasnum = 0;
         double cdformapagamento = Double.parseDouble(formapagamento);
         if (cdformapagamento == 4)
         {
@@ -262,7 +272,19 @@ public class TelaCaixa extends javax.swing.JDialog {
 
 
         }
-        Venda v = new Venda(cdvenda, cdformapagamento, login.getCD_FUNC(), 0,valordesconto, null);
+        else{
+            if (cdformapagamento == 2){
+            String qtdparcelas = JOptionPane.showInputDialog(null, "Informe a quantidade de parcelas", "Parcelas", JOptionPane.QUESTION_MESSAGE);
+            if (qtdparcelas == null || qtdparcelas.equals("") || qtdparcelas.equals("0"))
+                return;
+            qtdparcelasnum = Double.parseDouble(qtdparcelas);
+            if (qtdparcelasnum > 6)
+            {
+                JOptionPane.showMessageDialog(null, "Quantidade de parcelas excede o máximo permitido");
+                return;
+            }
+        }
+        Venda v = new Venda(cdvenda, cdformapagamento, login.getCD_FUNC(), 0,valordesconto, null,qtdparcelasnum);
         daovenda.insertVenda(v);
         for(int x=0; x < itenscarrinho.size(); x++)
         {
@@ -278,6 +300,7 @@ public class TelaCaixa extends javax.swing.JDialog {
         imprimirCupom(v);
         JOptionPane.showMessageDialog(null, "Venda Realizada com Sucesso!");
         novavenda();
+      }
     }
 
     public void imprimirCupom(Venda v)
@@ -483,6 +506,7 @@ public class TelaCaixa extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtNotaFiscal = new javax.swing.JTextArea();
         jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -635,6 +659,8 @@ public class TelaCaixa extends javax.swing.JDialog {
 
         jLabel18.setText("F7 - Calculadora");
 
+        jLabel19.setText("F8 - Cadastra Produto");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -696,7 +722,9 @@ public class TelaCaixa extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel16)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel18)))
+                        .addComponent(jLabel18)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel19)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -749,7 +777,8 @@ public class TelaCaixa extends javax.swing.JDialog {
                     .addComponent(jLabel15)
                     .addComponent(jLabel11)
                     .addComponent(jLabel16)
-                    .addComponent(jLabel18))
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19))
                 .addGap(11, 11, 11))
         );
 
@@ -774,6 +803,7 @@ public class TelaCaixa extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

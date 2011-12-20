@@ -46,7 +46,6 @@ public class RelatorioRelacaoProdutos extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblCabecalho = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtRelatorio = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
@@ -54,9 +53,6 @@ public class RelatorioRelacaoProdutos extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        lblCabecalho.setFont(new java.awt.Font("Courier New", 1, 12));
-        lblCabecalho.setText("Descrição                                                     Categoria                       Marca                           Quantidade  Vl Unit.   \t DT VENC.");
 
         txtRelatorio.setColumns(20);
         txtRelatorio.setFont(new java.awt.Font("Courier New", 0, 12));
@@ -80,7 +76,7 @@ public class RelatorioRelacaoProdutos extends javax.swing.JDialog {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24));
-        jLabel1.setText("Relação de Produtos Cadastrados");
+        jLabel1.setText("Relatório por Período");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,9 +87,7 @@ public class RelatorioRelacaoProdutos extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblCabecalho, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1106, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1106, Short.MAX_VALUE)
                             .addContainerGap())
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jButton1)
@@ -102,17 +96,15 @@ public class RelatorioRelacaoProdutos extends javax.swing.JDialog {
                             .addGap(18, 18, 18)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(331, 331, 331))))
+                        .addGap(425, 425, 425))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addGap(27, 27, 27)
-                .addComponent(lblCabecalho)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -172,7 +164,6 @@ public class RelatorioRelacaoProdutos extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblCabecalho;
     private javax.swing.JTextArea txtRelatorio;
     // End of variables declaration//GEN-END:variables
 }

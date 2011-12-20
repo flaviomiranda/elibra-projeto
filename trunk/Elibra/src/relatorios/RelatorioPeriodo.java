@@ -132,10 +132,10 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
         // TODO add your handling code here:
         String texto = txtRelatorio.getText();
         System.out.println(texto);
-        Impressao p = new Impressao();
-        p.imprime(texto);
+        //Impressao p = new Impressao();
+        //p.imprime(texto);
     }//GEN-LAST:event_jButton2ActionPerformed
-    public void carregaRelatorio(ArrayList<Venda> lista)
+       public void carregaRelatorio(ArrayList<Venda> lista)
     {
     	DaoCategoria daocategoria = new DaoCategoria();
     	DaoMarca daomarca = new DaoMarca();
@@ -175,6 +175,48 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
             txtRelatorio.setText(det);
         }
     }
+    public void carregaRelatorioAntigo(ArrayList<Venda> lista)
+    {
+    	DaoCategoria daocategoria = new DaoCategoria();
+    	DaoMarca daomarca = new DaoMarca();
+    	DaoProduto daoproduto = new DaoProduto();
+    	TreeMap<Integer,Categoria> mapcateg = (TreeMap) daocategoria.selectAllCategoriaMapCod();
+    	TreeMap<Integer,Marca> mapmarca = (TreeMap) daomarca.selectAllMarcaMap();
+        TreeMap<Double,Produto> mapproduto = daoproduto.selectAllProdutoMap();
+        String det="";
+        for(int x=0; x<lista.size();x++)
+        {
+            Venda v = lista.get(x);
+            det+="Detalhe da Venda: " + v.getCD_VENDA() + "\n";
+            DaoVendaProduto daovendaproduto = new DaoVendaProduto();
+            ArrayList<VendaProduto> listavendaproduto = new ArrayList<VendaProduto>();
+            listavendaproduto = daovendaproduto.selectVendaProduto(v.getCD_VENDA());
+            for(int y=0;y<listavendaproduto.size();y++)
+            {
+                VendaProduto vp = listavendaproduto.get(y);
+                Produto p = mapproduto.get(vp.getCD_PROD());
+                Marca m = mapmarca.get((int)p.getCD_MARCA());
+    		Categoria c = mapcateg.get((int)p.getCD_CAT());
+            Date dtvalidade = p.getDT_VAL_PROD();
+            String dtvalidadetxt="";
+            if (dtvalidade != null){
+               SimpleDateFormat formatador = new SimpleDateFormat("dd'/'MM'/'yyyy");
+               dtvalidadetxt = formatador.format(dtvalidade);
+               dtvalidadetxt = dtvalidadetxt.substring(3);
+            }
+            String qtdprod = Integer.toString((int)p.getQTD_PROD());
+            qtdprod = Formatador.tamanhoDe(qtdprod, 10);
+            String vlunit = Formatador.formataVirgula2(p.getVL_PROD());
+            vlunit = Formatador.tamanhoDe(vlunit, 7);
+            String lin =  Formatador.tamanhoDe(p.getNM_PROD(),60)+ "  " + Formatador.tamanhoDe(c.getDS_CAT(),30) + "  " +  Formatador.tamanhoDe(m.getNM_MARCA(),30) + "  " +
+    		qtdprod + "  R$ " + vlunit + "  " + dtvalidadetxt + "\n";
+            det +=lin;
+            }
+            txtRelatorio.setText(det);
+        }
+    }
+    
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
