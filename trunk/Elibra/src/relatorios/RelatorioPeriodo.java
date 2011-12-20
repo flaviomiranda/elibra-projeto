@@ -11,6 +11,8 @@
 package relatorios;
 
 import dao.DaoCategoria;
+import dao.DaoFormaPagamento;
+import dao.DaoFuncionario;
 import utilitarios.Formatador;
 import dao.DaoMarca;
 import dao.DaoProduto;
@@ -137,41 +139,28 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
        public void carregaRelatorio(ArrayList<Venda> lista)
     {
-    	DaoCategoria daocategoria = new DaoCategoria();
-    	DaoMarca daomarca = new DaoMarca();
-    	DaoProduto daoproduto = new DaoProduto();
-    	TreeMap<Integer,Categoria> mapcateg = (TreeMap) daocategoria.selectAllCategoriaMapCod();
-    	TreeMap<Integer,Marca> mapmarca = (TreeMap) daomarca.selectAllMarcaMap();
-        TreeMap<Double,Produto> mapproduto = daoproduto.selectAllProdutoMap();
+    	
         String det="";
+        String dtanterior="";
         for(int x=0; x<lista.size();x++)
         {
             Venda v = lista.get(x);
-            det+="Detalhe da Venda: " + v.getCD_VENDA() + "\n";
-            DaoVendaProduto daovendaproduto = new DaoVendaProduto();
-            ArrayList<VendaProduto> listavendaproduto = new ArrayList<VendaProduto>();
-            listavendaproduto = daovendaproduto.selectVendaProduto(v.getCD_VENDA());
-            for(int y=0;y<listavendaproduto.size();y++)
+            if (!dtanterior.equalsIgnoreCase(v.getDT_VENDA()))
             {
-                VendaProduto vp = listavendaproduto.get(y);
-                Produto p = mapproduto.get(vp.getCD_PROD());
-                Marca m = mapmarca.get((int)p.getCD_MARCA());
-    		Categoria c = mapcateg.get((int)p.getCD_CAT());
-            Date dtvalidade = p.getDT_VAL_PROD();
-            String dtvalidadetxt="";
-            if (dtvalidade != null){
-               SimpleDateFormat formatador = new SimpleDateFormat("dd'/'MM'/'yyyy");
-               dtvalidadetxt = formatador.format(dtvalidade);
-               dtvalidadetxt = dtvalidadetxt.substring(3);
+                dtanterior = v.getDT_VENDA();
+                det+= "\n\t\t Dia: "+ dtanterior;
             }
-            String qtdprod = Integer.toString((int)p.getQTD_PROD());
-            qtdprod = Formatador.tamanhoDe(qtdprod, 10);
-            String vlunit = Formatador.formataVirgula2(p.getVL_PROD());
-            vlunit = Formatador.tamanhoDe(vlunit, 7);
-            String lin =  Formatador.tamanhoDe(p.getNM_PROD(),60)+ "  " + Formatador.tamanhoDe(c.getDS_CAT(),30) + "  " +  Formatador.tamanhoDe(m.getNM_MARCA(),30) + "  " +
-    		qtdprod + "  R$ " + vlunit + "  " + dtvalidadetxt + "\n";
-            det +=lin;
-            }
+            
+            DaoFuncionario daofuncionario = new DaoFuncionario();
+            String nmfunc =  daofuncionario.selectFuncionario(v.getCD_FUNC()).getNM_FUNC().toUpperCase();
+            det+="\nVenda: " + v.getCD_VENDA() + "\t Hora: " + v.getHR_VENDA() + "\t Operador : " + nmfunc;
+            
+            det+="\nValor Compra:" + 0 + "\tValo Desconto: " + v.getVL_DESC() + "\t Valor Final: " + 0;
+            
+            DaoFormaPagamento daoformapagamento = new DaoFormaPagamento();
+            String nmformapgto = (daoformapagamento.FormaPagamento(v.getCD_FORM_PGMTO())).getNM_FORM_PGMTO().toUpperCase();
+            det+="\nForma de Pagamento: " + nmformapgto + "\t Quantidade de Parcelas: " + v.getQTD_PARCELA();
+            det+="\n";
             txtRelatorio.setText(det);
         }
     }

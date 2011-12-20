@@ -8,8 +8,9 @@ public class Venda {
 	double VL_DESC;
 	String HR_VENDA;
         double QTD_PARCELA;
+        String DT_VENDA;
 	
-	public Venda(double cd_venda, double cd_form_pgmto, double cd_func, double cd_cli, double vl_desc, String hr_venda, double qtdparcelas) {
+	public Venda(double cd_venda, double cd_form_pgmto, double cd_func, double cd_cli, double vl_desc, String hr_venda, double qtd_parcela, String dt_venda) {
 		super();
 		CD_VENDA = cd_venda;
 		CD_FORM_PGMTO = cd_form_pgmto;
@@ -17,7 +18,8 @@ public class Venda {
 		CD_CLI = cd_cli;
 		VL_DESC = vl_desc;
 		HR_VENDA = hr_venda;
-                QTD_PARCELA = qtdparcelas;
+                QTD_PARCELA = qtd_parcela;
+                DT_VENDA = dt_venda;
 	}
 
 	public double getCD_CLI() {
@@ -75,5 +77,13 @@ public class Venda {
         public void setQTD_PARCELA(double QTD_PARCELA) {
             this.QTD_PARCELA = QTD_PARCELA;
         }
+
+    public String getDT_VENDA() {
+        return DT_VENDA;
+    }
+
+    public void setDT_VENDA(String DT_VENDA) {
+        this.DT_VENDA = DT_VENDA;
+    }
         
 }

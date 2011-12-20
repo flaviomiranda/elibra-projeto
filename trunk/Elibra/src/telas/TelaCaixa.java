@@ -284,7 +284,7 @@ public class TelaCaixa extends javax.swing.JDialog {
                 return;
             }
         }
-        Venda v = new Venda(cdvenda, cdformapagamento, login.getCD_FUNC(), 0,valordesconto, null,qtdparcelasnum);
+        Venda v = new Venda(cdvenda, cdformapagamento, login.getCD_FUNC(), 0,valordesconto, null,qtdparcelasnum, null);
         daovenda.insertVenda(v);
         for(int x=0; x < itenscarrinho.size(); x++)
         {
