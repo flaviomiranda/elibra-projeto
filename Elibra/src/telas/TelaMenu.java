@@ -404,17 +404,17 @@ public class TelaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8MouseReleased
 
     private void jMenuItem13MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem13MouseReleased
-/*
-        if (f.getCD_ACESSO() == 0)
+   
+ /*     if (f.getCD_ACESSO() == 0)
         {
             JOptionPane.showMessageDialog(null,"Você não possui acesso, consulte administrador");
             return;
         }
-
-        String dtinicio = JOptionPane.showInputDialog(null, "Digite o Dia Inicial da Pesquisa");
+ */
+        String dtinicio = JOptionPane.showInputDialog(null, "Digite o Dia Inicial da Pesquisa(DD/MM/AAAA)");
         if (dtinicio == null || dtinicio.equals(""))
             return;
-        String dtfim = JOptionPane.showInputDialog(null, "Digite o Dia Final da Pesquisa");
+        String dtfim = JOptionPane.showInputDialog(null, "Digite o Dia Final da Pesquisa(DD/MM/AAAA)");
         if (dtfim == null || dtfim.equals(""))
             return;
         //recebe dados a ser pesquisado
@@ -429,7 +429,7 @@ public class TelaMenu extends javax.swing.JFrame {
         RelatorioPeriodo rp = new RelatorioPeriodo(null, true,lista);
         rp.setLocationRelativeTo(null);
         rp.setVisible(true);
-*/
+
     }//GEN-LAST:event_jMenuItem13MouseReleased
 
     private void jMenuItem9MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem9MouseReleased
