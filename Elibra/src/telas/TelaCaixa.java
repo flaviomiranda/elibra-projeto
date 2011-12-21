@@ -282,6 +282,7 @@ public class TelaCaixa extends javax.swing.JDialog {
                 return;
             }
         }
+        }
         Venda v = new Venda(cdvenda, cdformapagamento, login.getCD_FUNC(), 0,valordesconto, null,qtdparcelasnum, null,totalgeral);
         daovenda.insertVenda(v);
         for(int x=0; x < itenscarrinho.size(); x++)
@@ -298,7 +299,7 @@ public class TelaCaixa extends javax.swing.JDialog {
         imprimirCupom(v);
         JOptionPane.showMessageDialog(null, "Venda Realizada com Sucesso!");
         novavenda();
-      }
+      
     }
 
     public void imprimirCupom(Venda v)

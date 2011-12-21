@@ -1,0 +1,20 @@
+
+ELIBRA COMERCIO DE SALVADOS DE SINISTRO LTDA
+AV. BOTUQUARA, 245 CEP:04135-20
+BOSQUE DA SAUDE - SAO PAULO-SP TEL:(11)3571-0500
+------------------------------------------------
+21/12/2011 19:23:20                   COD:000009
+------------------------------------------------
+ITEM CODIGO         DESCRICAO
+QTD.     UN      VL.UNIT.(R$)       VL.ITEM(R$)
+------------------------------------------------
+001  7898452496235   Lancheira termica           
+   1,000 UND x         10,00               10,00
+002  7896108600487   Castanha de caju 30g        
+   5,000 UND x          1,30                6,50
+------------------------------------------------
+TOTAL                                R$ 16,50
+FORMA DE PAGAMENTO: DEBITO
+OPERADOR: AMANDA
+------------------------------------------------
+ESTE CUPOM NAO POSSUI VALOR FISCAL

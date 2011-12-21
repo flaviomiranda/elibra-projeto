@@ -1,0 +1,24 @@
+
+ELIBRA COMERCIO DE SALVADOS DE SINISTRO LTDA
+AV. BOTUQUARA, 245 CEP:04135-20
+BOSQUE DA SAUDE - SAO PAULO-SP TEL:(11)3571-0500
+------------------------------------------------
+21/12/2011 19:16:04                   COD:000007
+------------------------------------------------
+ITEM CODIGO         DESCRICAO
+QTD.     UN      VL.UNIT.(R$)       VL.ITEM(R$)
+------------------------------------------------
+001  12             Lixa Multiuso Alcar A230    
+   1,000 UND x          0,50                0,50
+002  14             Lanterna Jetoil             
+   1,000 UND x         12,00               12,00
+003  7898473132488   Hidratante TodoDia frutas ve
+   1,000 UND x         23,50               23,50
+004  7898473132365   Hidratante TodoDia macadâmia
+   1,000 UND x         23,50               23,50
+------------------------------------------------
+TOTAL                                R$ 59,50
+FORMA DE PAGAMENTO: DINHEIRO
+OPERADOR: AMANDA
+------------------------------------------------
+ESTE CUPOM NAO POSSUI VALOR FISCAL
