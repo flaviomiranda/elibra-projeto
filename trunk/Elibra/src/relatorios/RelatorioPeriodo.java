@@ -157,10 +157,50 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
             //Trata Quebra de dia
             if (!dtanterior.equalsIgnoreCase(v.getDT_VENDA()))
             {
-                double tot = totalcartaodia + totaldinheirodia + totaldebitodia;
-                det+= "Total Vendido No Dia: " + tot + "(\tDinheiro: " + totaldinheirodia + "\t Débito: " + totaldebito + "\t Cartão: " + totalcartaodia + "\t Cheque: " + totalcheque + " )";
                 dtanterior = v.getDT_VENDA();
                 det+= "\n\t\t Dia: "+ dtanterior;
+            }
+            
+            DaoFuncionario daofuncionario = new DaoFuncionario();
+            String nmfunc =  daofuncionario.selectFuncionario(v.getCD_FUNC()).getNM_FUNC().toUpperCase();
+            det+="\nVenda: R$" + Formatador.zerosEsquerda6((int)v.getCD_VENDA()) + "\t Operador : " + nmfunc;
+            double vlvenda  = v.getVL_VENDA() - v.getVL_DESC();
+            det+="\nValor Compra: R$" + Formatador.formataVirgula2(v.getVL_VENDA()) + "\tValor Desconto: R$" + Formatador.formataVirgula2(v.getVL_DESC()) + "\t Valor Final: R$" + Formatador.formataVirgula2(vlvenda);
+            
+            DaoFormaPagamento daoformapagamento = new DaoFormaPagamento();
+            String nmformapgto = (daoformapagamento.FormaPagamento(v.getCD_FORM_PGMTO())).getNM_FORM_PGMTO().toUpperCase();
+            det+="\nForma de Pagamento: " + nmformapgto + "\t Quantidade de Parcelas: " + (int)v.getQTD_PARCELA();
+            
+            switch ((int)v.getCD_FORM_PGMTO())
+            {
+                case 1:
+                {
+                    totalchequedia += vlvenda;
+                    break;
+                }
+                case 2:
+                {
+                    totalcartaodia += vlvenda;
+                    break;
+                }
+                case 3:
+                {
+                    totaldebitodia += vlvenda;
+                    break;
+                }
+                case 4:
+                {
+                    totaldinheirodia += vlvenda;
+                    break;
+                }
+            }        
+            
+            det+="\n";
+            
+            if (lista.size() == x+1 ||!dtanterior.equalsIgnoreCase(lista.get(x+1).getDT_VENDA()))
+            {
+                double tot = totalcartaodia + totaldinheirodia + totaldebitodia;
+                det+= "Total Vendido No Dia: " + Formatador.formataVirgula2(tot) + "\t(Dinheiro: " + Formatador.formataVirgula2(totaldinheirodia) + "\t Débito: " + Formatador.formataVirgula2(totaldebitodia) + "\t Cartão: " + Formatador.formataVirgula2(totalcartaodia) + "\t Cheque: " + Formatador.formataVirgula2(totalchequedia) + ")";
                 totalcartao += totalcartaodia;
                 totaldinheiro += totaldinheirodia;
                 totaldebito += totaldebitodia;
@@ -171,20 +211,8 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
                 totalchequedia = 0;
                 totp+=tot;
             }
-            
-            DaoFuncionario daofuncionario = new DaoFuncionario();
-            String nmfunc =  daofuncionario.selectFuncionario(v.getCD_FUNC()).getNM_FUNC().toUpperCase();
-            det+="\nVenda: " + v.getCD_VENDA() + "\t Hora: " + v.getHR_VENDA() + "\t Operador : " + nmfunc;
-            
-            det+="\nValor Compra:" + 0 + "\tValo Desconto: " + v.getVL_DESC() + "\t Valor Final: " + v.getVL_VENDA();
-            
-            DaoFormaPagamento daoformapagamento = new DaoFormaPagamento();
-            String nmformapgto = (daoformapagamento.FormaPagamento(v.getCD_FORM_PGMTO())).getNM_FORM_PGMTO().toUpperCase();
-            det+="\nForma de Pagamento: " + nmformapgto + "\t Quantidade de Parcelas: " + v.getQTD_PARCELA();
-            det+="\n";
-            
         }
-        det+= "Total Vendido No Dia: " + totp + "(\tDinheiro: " + totaldinheirodia + "\t Débito: " + totaldebito + "\t Cartão: " + totalcartaodia + "\t Cheque: " + totalcheque + " )";
+        det+= "\n\nTotal Vendido No Periodo: R$" + Formatador.formataVirgula2(totp) + "\t(Dinheiro: R$" + Formatador.formataVirgula2(totaldinheiro) + "\t Débito: R$" + Formatador.formataVirgula2(totaldebito) + "\t Cartão: R$" + Formatador.formataVirgula2(totalcartao) + "\t Cheque: R$" + Formatador.formataVirgula2(totalcheque) + ")";
         txtRelatorio.setText(det);
     }
     public void carregaRelatorioAntigo(ArrayList<Venda> lista)

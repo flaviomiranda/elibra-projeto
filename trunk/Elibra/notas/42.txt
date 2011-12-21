@@ -1,0 +1,18 @@
+
+ELIBRA COMERCIO DE SALVADOS DE SINISTRO LTDA
+AV. BOTUQUARA, 245 CEP:04135-20
+BOSQUE DA SAUDE - SAO PAULO-SP TEL:(11)3571-0500
+------------------------------------------------
+17/12/2011 01:00:21                   COD:000042
+------------------------------------------------
+ITEM CODIGO         DESCRICAO
+QTD.     UN      VL.UNIT.(R$)       VL.ITEM(R$)
+------------------------------------------------
+001  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+------------------------------------------------
+TOTAL                                R$ 39,00
+FORMA DE PAGAMENTO: DINHEIRO
+OPERADOR: RAFAEL
+------------------------------------------------
+ESTE CUPOM NAO POSSUI VALOR FISCAL
