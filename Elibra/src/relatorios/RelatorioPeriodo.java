@@ -142,27 +142,50 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
     	
         String det="";
         String dtanterior="";
+        double totalcartaodia =0;
+        double totaldinheirodia = 0;
+        double totaldebitodia = 0;
+        double totalchequedia = 0;
+        double totalcartao =0;
+        double totaldinheiro = 0;
+        double totaldebito = 0;
+        double totalcheque = 0;
+        double totp=0;
         for(int x=0; x<lista.size();x++)
         {
             Venda v = lista.get(x);
+            //Trata Quebra de dia
             if (!dtanterior.equalsIgnoreCase(v.getDT_VENDA()))
             {
+                double tot = totalcartaodia + totaldinheirodia + totaldebitodia;
+                det+= "Total Vendido No Dia: " + tot + "(\tDinheiro: " + totaldinheirodia + "\t Débito: " + totaldebito + "\t Cartão: " + totalcartaodia + "\t Cheque: " + totalcheque + " )";
                 dtanterior = v.getDT_VENDA();
                 det+= "\n\t\t Dia: "+ dtanterior;
+                totalcartao += totalcartaodia;
+                totaldinheiro += totaldinheirodia;
+                totaldebito += totaldebitodia;
+                totalcheque+= totalchequedia;
+                totalcartaodia = 0;
+                totaldinheirodia = 0;
+                totaldebitodia = 0;
+                totalchequedia = 0;
+                totp+=tot;
             }
             
             DaoFuncionario daofuncionario = new DaoFuncionario();
             String nmfunc =  daofuncionario.selectFuncionario(v.getCD_FUNC()).getNM_FUNC().toUpperCase();
             det+="\nVenda: " + v.getCD_VENDA() + "\t Hora: " + v.getHR_VENDA() + "\t Operador : " + nmfunc;
             
-            det+="\nValor Compra:" + 0 + "\tValo Desconto: " + v.getVL_DESC() + "\t Valor Final: " + 0;
+            det+="\nValor Compra:" + 0 + "\tValo Desconto: " + v.getVL_DESC() + "\t Valor Final: " + v.getVL_VENDA();
             
             DaoFormaPagamento daoformapagamento = new DaoFormaPagamento();
             String nmformapgto = (daoformapagamento.FormaPagamento(v.getCD_FORM_PGMTO())).getNM_FORM_PGMTO().toUpperCase();
             det+="\nForma de Pagamento: " + nmformapgto + "\t Quantidade de Parcelas: " + v.getQTD_PARCELA();
             det+="\n";
-            txtRelatorio.setText(det);
+            
         }
+        det+= "Total Vendido No Dia: " + totp + "(\tDinheiro: " + totaldinheirodia + "\t Débito: " + totaldebito + "\t Cartão: " + totalcartaodia + "\t Cheque: " + totalcheque + " )";
+        txtRelatorio.setText(det);
     }
     public void carregaRelatorioAntigo(ArrayList<Venda> lista)
     {
