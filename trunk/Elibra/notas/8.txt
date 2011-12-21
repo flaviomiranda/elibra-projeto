@@ -1,0 +1,20 @@
+
+ELIBRA COMERCIO DE SALVADOS DE SINISTRO LTDA
+AV. BOTUQUARA, 245 CEP:04135-20
+BOSQUE DA SAUDE - SAO PAULO-SP TEL:(11)3571-0500
+------------------------------------------------
+21/12/2011 19:21:16                   COD:000008
+------------------------------------------------
+ITEM CODIGO         DESCRICAO
+QTD.     UN      VL.UNIT.(R$)       VL.ITEM(R$)
+------------------------------------------------
+001  7896108600487   Castanha de caju 30g        
+   8,000 UND x          1,30               10,40
+------------------------------------------------
+TOTAL                                R$ 10,40
+DESCONTO                             R$-0,40
+TOTAL COM DESCONTO                   R$ 10,00
+FORMA DE PAGAMENTO: DINHEIRO
+OPERADOR: AMANDA
+------------------------------------------------
+ESTE CUPOM NAO POSSUI VALOR FISCAL
