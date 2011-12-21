@@ -269,8 +269,6 @@ public class TelaCaixa extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "O troco a ser devolvido é de: R$"+ trocotxt, "Troco", JOptionPane.PLAIN_MESSAGE);
                     }
                 }
-
-
         }
         else{
             if (cdformapagamento == 2){
@@ -284,7 +282,7 @@ public class TelaCaixa extends javax.swing.JDialog {
                 return;
             }
         }
-        Venda v = new Venda(cdvenda, cdformapagamento, login.getCD_FUNC(), 0,valordesconto, null,qtdparcelasnum, null);
+        Venda v = new Venda(cdvenda, cdformapagamento, login.getCD_FUNC(), 0,valordesconto, null,qtdparcelasnum, null,totalgeral);
         daovenda.insertVenda(v);
         for(int x=0; x < itenscarrinho.size(); x++)
         {
