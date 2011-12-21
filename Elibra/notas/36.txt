@@ -1,0 +1,80 @@
+
+ELIBRA COMERCIO DE SALVADOS DE SINISTRO LTDA
+AV. BOTUQUARA, 245 CEP:04135-20
+BOSQUE DA SAUDE - SAO PAULO-SP TEL:(11)3571-0500
+------------------------------------------------
+17/12/2011 00:31:35                   COD:000036
+------------------------------------------------
+ITEM CODIGO         DESCRICAO
+QTD.     UN      VL.UNIT.(R$)       VL.ITEM(R$)
+------------------------------------------------
+001  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+002  2              Vinho Sichel Le Cellier Bord
+   1,000 UND x         46,00               46,00
+003  3              Minha Casinha de Boneca Peti
+   1,000 UND x         82,00               82,00
+004  4              Pato com luzes e sons Molto 
+   1,000 UND x         49,90               49,90
+005  5              Tiara Encantada Disney Princ
+   1,000 UND x          5,00                5,00
+006  63             Chinelo de pano diversas cor
+   1,000 UND x         10,00               10,00
+007  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+008  2              Vinho Sichel Le Cellier Bord
+   1,000 UND x         46,00               46,00
+009  3              Minha Casinha de Boneca Peti
+   1,000 UND x         82,00               82,00
+010  4              Pato com luzes e sons Molto 
+   1,000 UND x         49,90               49,90
+011  2              Vinho Sichel Le Cellier Bord
+   1,000 UND x         46,00               46,00
+012  3              Minha Casinha de Boneca Peti
+   1,000 UND x         82,00               82,00
+013  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+014  2              Vinho Sichel Le Cellier Bord
+   1,000 UND x         46,00               46,00
+015  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+016  21             Suporte para serra copo 11mm
+   1,000 UND x         27,00               27,00
+017  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+018  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+019  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+020  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+021  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+022  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+023  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+024  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+025  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+026  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+027  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+028  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+029  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+030  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+031  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+032  1              Vinho tinto Flor d`englora n
+   1,000 UND x         39,00               39,00
+------------------------------------------------
+TOTAL                                R$ 1351,80
+FORMA DE PAGAMENTO: CHEQUE
+OPERADOR: RAFAEL
+------------------------------------------------
+ESTE CUPOM NAO POSSUI VALOR FISCAL
