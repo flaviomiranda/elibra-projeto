@@ -48,7 +48,7 @@ public class ArquivoLog {
         arqlog += System.getProperty("line.separator") + timestamp +  " - " + e.getCause();
         arqlog += System.getProperty("line.separator") + timestamp +  " - " + e.getClass();
         try {
-            FileWriter fw = new FileWriter(nomeArquivo);
+            FileWriter fw = new FileWriter(new File("./log/"+nomeArquivo));
             fw.write(arqlog);
             fw.close();
         }
