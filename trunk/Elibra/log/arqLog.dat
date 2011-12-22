@@ -1,3 +1,12 @@
 
-2011-12-16-22.38.36 - Erro ao chamar metodo de inicializacao, retorno: false
-2011-12-16-22.38.36 - Erro ao chamar metodo de inicializacao, retorno: false
+2011-12-22-16.11.00 - Erro ao conectar
+2011-12-22-16.11.00 - Exceção de E/S: The Network Adapter could not establish the connection
+2011-12-22-16.11.00 - Exceção de E/S: The Network Adapter could not establish the connection
+2011-12-22-16.11.00 - null
+2011-12-22-16.11.00 - class java.sql.SQLException
+
+2011-12-22-16.15.36 - Erro ao conectar
+2011-12-22-16.15.36 - Exceção de E/S: The Network Adapter could not establish the connection
+2011-12-22-16.15.36 - Exceção de E/S: The Network Adapter could not establish the connection
+2011-12-22-16.15.36 - null
+2011-12-22-16.15.36 - class java.sql.SQLException
