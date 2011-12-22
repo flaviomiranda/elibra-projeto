@@ -61,8 +61,9 @@ public class TelaMenu extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jSeparator7 = new javax.swing.JPopupMenu.Separator();
         jMenuItem13 = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem14 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -160,23 +161,29 @@ public class TelaMenu extends javax.swing.JFrame {
         jMenu6.setText("Relatórios");
 
         jMenuItem7.setText("Relação de Produtos");
-        jMenuItem7.setEnabled(false);
         jMenuItem7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jMenuItem7MouseReleased(evt);
             }
         });
         jMenu6.add(jMenuItem7);
-        jMenu6.add(jSeparator7);
 
         jMenuItem13.setText("Vendas Periodo");
-        jMenuItem13.setEnabled(false);
         jMenuItem13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jMenuItem13MouseReleased(evt);
             }
         });
         jMenu6.add(jMenuItem13);
+        jMenu6.add(jSeparator7);
+
+        jMenuItem14.setText("Fechar Caixa");
+        jMenuItem14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jMenuItem14MouseReleased(evt);
+            }
+        });
+        jMenu6.add(jMenuItem14);
 
         jMenuBar1.add(jMenu6);
 
@@ -451,6 +458,65 @@ public class TelaMenu extends javax.swing.JFrame {
                  }
     }//GEN-LAST:event_jMenuItem9MouseReleased
 
+    private void jMenuItem14MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem14MouseReleased
+        ArrayList<Venda> lista = new ArrayList<Venda>();
+        DaoVenda daovenda = new DaoVenda();
+        lista = daovenda.selectAllVendaDia();
+        double totalcredito =0;
+        double totaldinheiro = 0;
+        double totaldebito = 0;
+        double totalcheque = 0;
+        double totalvenda=0;
+        double totaldesc=0;
+        double totalgeral=0;
+        for(int x=0; x<lista.size();x++)
+        {
+            Venda v = lista.get(x);
+            totalvenda += v.getVL_VENDA();
+            totaldesc  += v.getVL_DESC();
+            double vlvenda = v.getVL_VENDA() - v.getVL_DESC();
+            totalgeral += vlvenda;            
+            DaoFormaPagamento daoformapagamento = new DaoFormaPagamento();
+            String nmformapgto = (daoformapagamento.FormaPagamento(v.getCD_FORM_PGMTO())).getNM_FORM_PGMTO().toUpperCase();
+                        
+            switch ((int)v.getCD_FORM_PGMTO())
+            {
+                case 1:
+                {
+                    totalcheque += vlvenda;
+                    break;
+                }
+                case 2:
+                {
+                    totalcredito += vlvenda;
+                    break;
+                }
+                case 3:
+                {
+                    totaldebito += vlvenda;
+                    break;
+                }
+                case 4:
+                {
+                    totaldinheiro += vlvenda;
+                    break;
+                }
+            }
+           
+        }
+        String msg = "Total Vendido no Dia: R$" + Formatador.formataVirgula2(totalvenda) + "\n"
+                   + "Total Desconto......: R$" + Formatador.formataVirgula2(totaldesc)  + "\n"
+                   + "Total Geral.........: R$" + Formatador.formataVirgula2(totalgeral) + "\n"
+                   + "----------------------------------------------" + "\n"
+                   + "Total Dinheiro......: R$" + Formatador.formataVirgula2(totaldinheiro) + "\n"
+                   + "Total Débito........: R$" + Formatador.formataVirgula2(totaldebito) + "\n"
+                   + "Total Crédito.......: R$" + Formatador.formataVirgula2(totalcredito) + "\n"
+                   + "Total Cheque........: R$" + Formatador.formataVirgula2(totalcheque);
+        
+        JOptionPane.showMessageDialog(null, msg, "Fechamento do Dia", JOptionPane.INFORMATION_MESSAGE);
+                
+    }//GEN-LAST:event_jMenuItem14MouseReleased
+
     /**
     * @param args the command line arguments
     */
@@ -480,6 +546,7 @@ public class TelaMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

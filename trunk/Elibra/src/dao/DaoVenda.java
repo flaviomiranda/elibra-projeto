@@ -90,7 +90,7 @@ public ArrayList<Venda> selectAllVendaBetweenDate (String dtinicio, String dtfim
 		Connection con = ConFactory.conectar(0);
 		PreparedStatement ps = null;
 		try {
-			ps = con.prepareStatement("SELECT CD_VENDA, CD_FORM_PGMTO, CD_FUNC, CD_CLI, VL_DESCONTO, HR_VENDA, QTD_PARCELA, DT_VENDA, VL_VENDA FROM TVENDA WHERE DT_VENDA >= ? AND DT_VENDA <= ?");
+			ps = con.prepareStatement("SELECT CD_VENDA, CD_FORM_PGMTO, CD_FUNC, CD_CLI, VL_DESCONTO, HR_VENDA, QTD_PARCELA, DT_VENDA, VL_VENDA FROM TVENDA WHERE DT_VENDA >= ? AND DT_VENDA <= ? ORDER BY CD_VENDA");
 			ps.setString(1, dtinicio);
                         ps.setString(2, dtfim);
 			ArrayList<Venda> lista = new ArrayList<Venda>();
@@ -115,5 +115,36 @@ public ArrayList<Venda> selectAllVendaBetweenDate (String dtinicio, String dtfim
 			ConFactory.fechar(con,ps);
 		}
 	}
+
+public ArrayList<Venda> selectAllVendaDia ()
+	{
+		Connection con = ConFactory.conectar(0);
+		PreparedStatement ps = null;
+		try {
+			ps = con.prepareStatement("SELECT CD_VENDA, CD_FORM_PGMTO, CD_FUNC, CD_CLI, VL_DESCONTO, HR_VENDA, QTD_PARCELA, DT_VENDA, VL_VENDA FROM TVENDA WHERE DT_VENDA = CURRENT_DATE ORDER BY CD_VENDA");
+			ArrayList<Venda> lista = new ArrayList<Venda>();
+                        ResultSet rs = ps.executeQuery();
+			if (rs.next())
+			{
+
+                            do{
+                                lista.add(new Venda(rs.getDouble(1),rs.getDouble(2),rs.getDouble(3),rs.getDouble(4),rs.getDouble(5), rs.getString(6), rs.getDouble(7), rs.getString(8), rs.getDouble(9)));
+                            }while(rs.next() );
+                            return lista;
+			}else
+			{
+			    return lista;
+			}
+		    }
+			catch (SQLException e) {
+			TrataErro.imprimeErro("Erro no select na TVENDA", e.getMessage());
+			return null;
+		}
+		finally{
+			ConFactory.fechar(con,ps);
+		}
+	}
+
+
 
 }   
