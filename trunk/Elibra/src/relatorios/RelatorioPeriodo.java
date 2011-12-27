@@ -78,7 +78,7 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Relatório por Período");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -95,10 +95,11 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 966, Short.MAX_VALUE)
                         .addComponent(jButton2)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(331, 331, 331))))
+                        .addGap(18, 18, 18))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(377, 377, 377)
+                .addComponent(jLabel1)
+                .addContainerGap(498, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,12 +151,14 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
             if (dtanterior != v.getDT_VENDA())
             {
                 dtanterior = v.getDT_VENDA();
-                det+= "\n\t\t Dia: "+ dtanterior;
+                SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");  
+                String novoFormato = formatador.format(dtanterior);
+                det+= "\nDia: "+ novoFormato;
             }
             
             DaoFuncionario daofuncionario = new DaoFuncionario();
             String nmfunc =  daofuncionario.selectFuncionario(v.getCD_FUNC()).getNM_FUNC().toUpperCase();
-            det+="\nVenda: R$" + Formatador.zerosEsquerda6((int)v.getCD_VENDA()) + "\t Operador : " + nmfunc;
+            det+="\nVenda: " + Formatador.zerosEsquerda6((int)v.getCD_VENDA()) + "\t Operador : " + nmfunc;
             double vlvenda  = v.getVL_VENDA() - v.getVL_DESC();
             det+="\nValor Compra: R$" + Formatador.formataVirgula2(v.getVL_VENDA()) + "\tValor Desconto: R$" + Formatador.formataVirgula2(v.getVL_DESC()) + "\t Valor Final: R$" + Formatador.formataVirgula2(vlvenda);
             

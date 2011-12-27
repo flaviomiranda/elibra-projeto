@@ -60,7 +60,7 @@ public int insertVenda(Venda v)
 		Connection con = ConFactory.conectar(0);
 		PreparedStatement ps = null;
 		try {
-			ps = con.prepareStatement("INSERT INTO TVENDA (CD_VENDA, CD_FORM_PGMTO, CD_FUNC, CD_CLI, VL_DESCONTO, HR_VENDA, QTD_PARCELA, DT_VENDA, VL_VENDA) VALUES (?,?,?,?,?,CURRENT_TIMESTAMP,?,SYSDATE,?)");
+			ps = con.prepareStatement("INSERT INTO TVENDA (CD_VENDA, CD_FORM_PGMTO, CD_FUNC, CD_CLI, VL_DESCONTO, HR_VENDA, QTD_PARCELA, DT_VENDA, VL_VENDA) VALUES (?,?,?,?,?,CURRENT_TIMESTAMP,?,?,?)");
 
 
 			ps.setDouble(1, v.getCD_VENDA());
@@ -69,7 +69,8 @@ public int insertVenda(Venda v)
 			ps.setDouble(4, v.getCD_CLI());
 			ps.setDouble(5, v.getVL_DESC());
                         ps.setDouble(6, v.getQTD_PARCELA());
-                        ps.setDouble(7, v.getVL_VENDA());
+                        ps.setDate(7, new java.sql.Date ( v.getDT_VENDA().getTime()));
+                        ps.setDouble(8, v.getVL_VENDA());
 			ps.executeUpdate();
 			return 0;                  
 	           }
