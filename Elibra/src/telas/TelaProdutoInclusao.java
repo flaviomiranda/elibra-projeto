@@ -498,8 +498,6 @@ public class TelaProdutoInclusao extends javax.swing.JDialog {
         txtDataValidade.setText(null);
         cbbCategoria.setSelectedIndex(0);
         cbbMarca.setSelectedIndex(0);
-        cbbMarca.removeAllItems();
-        cbbMarca.addItem("Selecionar...");
         txtCodigoBarras.requestFocus();
     }//GEN-LAST:event_jButton3ActionPerformed
 
