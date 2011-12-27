@@ -292,14 +292,17 @@ public class TelaTroca extends javax.swing.JDialog {
         else
         {
             if(txtVlUnit.getText().equals(""))
-                JOptionPane.showMessageDialog(null, "Obrigatório informar descrição!");
+                JOptionPane.showMessageDialog(null, "Obrigatório informar valor unitário!");
             else
             {
              if(cbbMotivo.getSelectedIndex() == 0)
                     JOptionPane.showMessageDialog(null, "Obrigatório selecionar o motivo!");
              else
               {
-                    String codigobarras = txtCodigoBarras.getText();
+                    if(txtDescricao.getText().equals(""))
+                        JOptionPane.showMessageDialog(null, "Obrigatório informar descrição!");
+                    else
+                    {String codigobarras = txtCodigoBarras.getText();
                     DaoProduto daoproduto = new DaoProduto();
                     Produto p = daoproduto.selectCodigoBarraProduto(codigobarras);
                     String descricao = txtDescricao.getText();
@@ -316,6 +319,7 @@ public class TelaTroca extends javax.swing.JDialog {
                    }
                   }
                 }
+        }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void txtVlUnitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVlUnitKeyTyped
