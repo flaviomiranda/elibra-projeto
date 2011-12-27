@@ -10,6 +10,7 @@ import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.JobName;
 import javax.print.attribute.standard.MediaSizeName;
 import javax.print.attribute.standard.OrientationRequested;
+import javax.swing.JOptionPane;
 import utilitarios.TrataErro;
 
 public class Impressao {
@@ -19,6 +20,42 @@ public class Impressao {
     public Impressao() {
         //detectaImpressoras();
     }
+    
+    public int escolheImpressora()
+    {
+        int ret =0;
+        ArrayList<PrintService> listaimpressora = listaImpressoras();
+        if (!listaimpressora.isEmpty()){
+            String impressoras="";
+            for(int x=0; x< listaimpressora.size(); x++)
+            {
+                impressoras+=(x + ")  " + listaimpressora.get(x).getName() +"\n");
+            }
+            String opx = JOptionPane.showInputDialog(null, "Escolha a impressora que deseja utilizar: \n" + impressoras);
+            int op=0;
+            try {
+            op = Integer.parseInt(opx);
+                }
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null, "Opção inválida");
+                ret =  2;
+            } 
+            if (op > listaimpressora.size())
+            {
+                JOptionPane.showMessageDialog(null, "Opção inválida");
+                ret =  2;
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foram encontradas impressoras instaladas");
+            ret = 3;
+            }
+        return ret;
+    }
+       
+      
+   
 
     public ArrayList<PrintService> listaImpressoras() {
         ArrayList<PrintService> lista = new ArrayList<PrintService>();

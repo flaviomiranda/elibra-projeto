@@ -22,6 +22,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TreeMap;
+import javax.print.PrintService;
+import javax.swing.JOptionPane;
 import model.Categoria;
 import model.Marca;
 import model.Produto;
@@ -71,14 +73,13 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
         });
 
         jButton2.setText("Imprimir");
-        jButton2.setEnabled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24));
         jLabel1.setText("Relatório por Período");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,19 +128,21 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
         // TODO add your handling code here:
         String texto = txtRelatorio.getText();
         System.out.println(texto);
-        //Impressao p = new Impressao();
-        //p.imprime(texto);
+        Impressao p = new Impressao();
+        int ret = p.escolheImpressora();
+        if (ret ==0){
+            p.imprime(texto);
+                }
     }//GEN-LAST:event_jButton2ActionPerformed
        public void carregaRelatorio(ArrayList<Venda> lista)
-    {
-    	
+        {    	
         String det="";
-        Date dtanterior= null;
+        String dtanterior= "";
         double totalcartaodia =0;
         double totaldinheirodia = 0;
         double totaldebitodia = 0;
         double totalchequedia = 0;
-        double totalcartao =0;
+        double totalcartao = 0;
         double totaldinheiro = 0;
         double totaldebito = 0;
         double totalcheque = 0;
@@ -148,17 +151,17 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
         {
             Venda v = lista.get(x);
             //Trata Quebra de dia
-            if (dtanterior != v.getDT_VENDA())
+            SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");  
+            String novoFormato = formatador.format(v.getDT_VENDA());
+            if (!dtanterior.equals(novoFormato))
             {
-                dtanterior = v.getDT_VENDA();
-                SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");  
-                String novoFormato = formatador.format(dtanterior);
-                det+= "\nDia: "+ novoFormato;
+                dtanterior = novoFormato;
+                det+= "\nDia: "+ novoFormato + "\n";
             }
             
             DaoFuncionario daofuncionario = new DaoFuncionario();
             String nmfunc =  daofuncionario.selectFuncionario(v.getCD_FUNC()).getNM_FUNC().toUpperCase();
-            det+="\nVenda: " + Formatador.zerosEsquerda6((int)v.getCD_VENDA()) + "\t Operador : " + nmfunc;
+            det+="\nVenda: " + Formatador.zerosEsquerda6((int)v.getCD_VENDA()) + "\t Operador: " + nmfunc;
             double vlvenda  = v.getVL_VENDA() - v.getVL_DESC();
             det+="\nValor Compra: R$" + Formatador.formataVirgula2(v.getVL_VENDA()) + "\tValor Desconto: R$" + Formatador.formataVirgula2(v.getVL_DESC()) + "\t Valor Final: R$" + Formatador.formataVirgula2(vlvenda);
             
@@ -192,10 +195,10 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
             
             det+="\n";
             
-            if (lista.size() == x+1 ||dtanterior != (lista.get(x+1).getDT_VENDA()))
+            if (lista.size() == x+1 )
             {
-                double tot = totalcartaodia + totaldinheirodia + totaldebitodia;
-                det+= "Total Vendido No Dia: " + Formatador.formataVirgula2(tot) + "\t(Dinheiro: " + Formatador.formataVirgula2(totaldinheirodia) + "\t Débito: " + Formatador.formataVirgula2(totaldebitodia) + "\t Cartão: " + Formatador.formataVirgula2(totalcartaodia) + "\t Cheque: " + Formatador.formataVirgula2(totalchequedia) + ")";
+                double tot = totalcartaodia + totaldinheirodia + totaldebitodia + totalchequedia;
+                det+= "\nTotal Vendido no Dia: R$" + Formatador.formataVirgula2(tot) + "\t\t(Dinheiro: R$" + Formatador.formataVirgula2(totaldinheirodia) + "\t Débito: R$" + Formatador.formataVirgula2(totaldebitodia) + "\t Cartão: R$" + Formatador.formataVirgula2(totalcartaodia) + "\t Cheque: R$" + Formatador.formataVirgula2(totalchequedia) + ")";
                 totalcartao += totalcartaodia;
                 totaldinheiro += totaldinheirodia;
                 totaldebito += totaldebitodia;
@@ -207,7 +210,7 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
                 totp+=tot;
             }
         }
-        det+= "\n\nTotal Vendido No Periodo: R$" + Formatador.formataVirgula2(totp) + "\t(Dinheiro: R$" + Formatador.formataVirgula2(totaldinheiro) + "\t Débito: R$" + Formatador.formataVirgula2(totaldebito) + "\t Cartão: R$" + Formatador.formataVirgula2(totalcartao) + "\t Cheque: R$" + Formatador.formataVirgula2(totalcheque) + ")";
+        det+= "\n\nTotal Vendido no Periodo: R$" + Formatador.formataVirgula2(totp) + "\t(Dinheiro: R$" + Formatador.formataVirgula2(totaldinheiro) + "\t Débito: R$" + Formatador.formataVirgula2(totaldebito) + "\t Cartão: R$" + Formatador.formataVirgula2(totalcartao) + "\t Cheque: R$" + Formatador.formataVirgula2(totalcheque) + ")";
         txtRelatorio.setText(det);
     }
    

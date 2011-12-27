@@ -272,7 +272,8 @@ public class TelaCaixa extends javax.swing.JDialog {
                 }
         }
         else{
-            if (cdformapagamento == 2){
+            //caso seja cheque ou cartao, obtem quantidade de parcelas
+            if (cdformapagamento == 2 || cdformapagamento == 1){
             String qtdparcelas = JOptionPane.showInputDialog(null, "Informe a quantidade de parcelas", "Parcelas", JOptionPane.QUESTION_MESSAGE);
             if (qtdparcelas == null || qtdparcelas.equals(""))
                 return;
