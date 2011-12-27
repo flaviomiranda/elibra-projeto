@@ -1,7 +1,7 @@
 package dao;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 import model.Estorno;
 import utilitarios.TrataErro;
 
@@ -31,6 +31,38 @@ public Estorno selectEstorno(int codigo)
 			ConFactory.fechar(con,ps);
 		}
 	}	
+
+
+public ArrayList<Estorno> selectEstornoBetween(java.util.Date dtinicio, java.util.Date dtfim)
+	{
+		Connection con = ConFactory.conectar(0);
+		PreparedStatement ps = null;
+		try {
+			ps = con.prepareStatement("SELECT NSEQ_ESTNO, CD_MOTIVO, CD_PROD, CD_FUNC, HR_EST, VL_UNIT_PROD, DS_MOTVO_ESTNO, DT_EST FROM TESTORNO WHERE DT_EST  >= ? AND DT_EST  <= ? ");
+			ps.setDate(1, new java.sql.Date (dtinicio.getTime()));
+                        ps.setDate(2, new java.sql.Date (dtfim.getTime()));
+			ArrayList<Estorno> lista = new ArrayList<Estorno>();
+                        ResultSet rs = ps.executeQuery();
+			if (rs.next())
+			{
+                            do{
+                                lista.add(new Estorno(rs.getDouble(1),rs.getDouble(2),rs.getDouble(3),rs.getDouble(4), rs.getString(5), rs.getDouble(6), rs.getString(7), rs.getString(8)));
+                            }while(rs.next() );
+                            return lista;
+			}else
+			{
+			    return lista;
+			}  
+		    }
+			catch (SQLException e) {
+			TrataErro.imprimeErro("Erro no select na TESTORNO", e.getMessage());
+			return null;
+		}
+		finally{
+			ConFactory.fechar(con,ps);
+		}
+	}	
+
 
 public double selectMaxEstorno()
 	{

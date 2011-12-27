@@ -1,6 +1,7 @@
 package telas;
 
 import dao.DaoCategoria;
+import dao.DaoEstorno;
 import dao.DaoFormaPagamento;
 import dao.DaoFuncionario;
 import dao.DaoLogin;
@@ -14,6 +15,7 @@ import java.util.*;
 import java.util.TreeMap;
 import javax.swing.JOptionPane;
 import model.Categoria;
+import model.Estorno;
 import model.FormaPagamento;
 import model.Funcionario;
 import model.Login;
@@ -539,8 +541,19 @@ public class TelaMenu extends javax.swing.JFrame {
             }
            
         }
+        DaoEstorno daoestorno = new DaoEstorno();
+        java.util.Date hoje = new Date(System.currentTimeMillis());
+        ArrayList<Estorno> listaestorno = new ArrayList<Estorno>();
+        listaestorno = daoestorno.selectEstornoBetween(hoje, hoje);
+        double totaltroca =0;
+        for(int x=0; x<listaestorno.size();x++)
+        {
+            totaltroca += listaestorno.get(x).getVL_UNIT_PROD();
+        }
+        
         String msg = "Total Vendido no Dia.: R$" + Formatador.formataVirgula2(totalvenda) + "\n"
                    + "Total Desconto...........: R$" + Formatador.formataVirgula2(totaldesc)  + "\n"
+                   + "Total Troca...................: R$" +  Formatador.formataVirgula2(totaltroca) + "\n"
                    + "Total Geral...................: R$" + Formatador.formataVirgula2(totalgeral) + "\n"
                    + "----------------------------------------------" + "\n"
                    + "Total Dinheiro....: R$" + Formatador.formataVirgula2(totaldinheiro) + "\n"
