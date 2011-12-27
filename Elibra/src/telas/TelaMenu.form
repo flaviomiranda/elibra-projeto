@@ -134,7 +134,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="Troca">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Troca"/>
+                <Property name="text" type="java.lang.String" value="Trocar"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TrocaMouseClicked"/>
@@ -183,8 +183,10 @@
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem11">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Motivo Estorno"/>
-                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuItem11MouseReleased"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>

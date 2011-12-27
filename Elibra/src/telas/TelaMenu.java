@@ -6,13 +6,12 @@ import dao.DaoFormaPagamento;
 import dao.DaoFuncionario;
 import dao.DaoLogin;
 import dao.DaoMarca;
+import dao.DaoMotivo;
 import dao.DaoProduto;
 import dao.DaoVenda;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.*;
-import java.util.TreeMap;
 import javax.swing.JOptionPane;
 import model.Categoria;
 import model.Estorno;
@@ -20,12 +19,11 @@ import model.FormaPagamento;
 import model.Funcionario;
 import model.Login;
 import model.Marca;
+import model.Motivo;
 import model.Produto;
 import model.Venda;
 import relatorios.RelatorioPeriodo;
-import relatorios.RelatorioRelacaoProdutos;
 import utilitarios.Formatador;
-import utilitarios.TrataErro;
 
 public class TelaMenu extends javax.swing.JFrame {
 
@@ -196,7 +194,7 @@ public class TelaMenu extends javax.swing.JFrame {
 
         btnTroca.setText("Serviços");
 
-        Troca.setText("Troca");
+        Troca.setText("Trocar");
         Troca.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TrocaMouseClicked(evt);
@@ -246,7 +244,11 @@ public class TelaMenu extends javax.swing.JFrame {
         jMenu8.add(jSeparator5);
 
         jMenuItem11.setText("Motivo Estorno");
-        jMenuItem11.setEnabled(false);
+        jMenuItem11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jMenuItem11MouseReleased(evt);
+            }
+        });
         jMenu8.add(jMenuItem11);
 
         btnTroca.add(jMenu8);
@@ -589,6 +591,20 @@ public class TelaMenu extends javax.swing.JFrame {
         tt.setLocationRelativeTo(null);
         tt.setVisible(true);
     }//GEN-LAST:event_TrocaMouseReleased
+
+    private void jMenuItem11MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem11MouseReleased
+        
+        String novomotivo = JOptionPane.showInputDialog(null, "Digite o novo motivo a ser cadastrado", "Cadastro de novo Motivo", JOptionPane.QUESTION_MESSAGE);
+                if(novomotivo !=null)
+                {
+                    DaoMotivo damotivo = new DaoMotivo();
+                    double seq = damotivo.selectMaxMotivo();
+                    seq = seq + 1;
+                    if (damotivo.insertMotivo(new Motivo(seq, novomotivo)) == 0)
+                        JOptionPane.showMessageDialog(null, "Motivo incluido com sucesso!!");
+                 }
+        
+    }//GEN-LAST:event_jMenuItem11MouseReleased
 
     /**
     * @param args the command line arguments
