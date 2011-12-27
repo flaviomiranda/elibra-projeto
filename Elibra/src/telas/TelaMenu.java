@@ -513,8 +513,8 @@ public class TelaMenu extends javax.swing.JFrame {
             totaldesc  += v.getVL_DESC();
             double vlvenda = v.getVL_VENDA() - v.getVL_DESC();
             totalgeral += vlvenda;            
-            DaoFormaPagamento daoformapagamento = new DaoFormaPagamento();
-            String nmformapgto = (daoformapagamento.FormaPagamento(v.getCD_FORM_PGMTO())).getNM_FORM_PGMTO().toUpperCase();
+            //DaoFormaPagamento daoformapagamento = new DaoFormaPagamento();
+            //String nmformapgto = (daoformapagamento.FormaPagamento(v.getCD_FORM_PGMTO())).getNM_FORM_PGMTO().toUpperCase();
                         
             switch ((int)v.getCD_FORM_PGMTO())
             {
@@ -541,6 +541,7 @@ public class TelaMenu extends javax.swing.JFrame {
             }
            
         }
+        
         DaoEstorno daoestorno = new DaoEstorno();
         java.util.Date hoje = new Date(System.currentTimeMillis());
         ArrayList<Estorno> listaestorno = new ArrayList<Estorno>();
@@ -550,10 +551,10 @@ public class TelaMenu extends javax.swing.JFrame {
         {
             totaltroca += listaestorno.get(x).getVL_UNIT_PROD();
         }
-        
-        String msg = "Total Vendido no Dia.: R$" + Formatador.formataVirgula2(totalvenda) + "\n"
-                   + "Total Desconto...........: R$" + Formatador.formataVirgula2(totaldesc)  + "\n"
-                   + "Total Troca...................: R$" +  Formatador.formataVirgula2(totaltroca) + "\n"
+        totalgeral -= totaltroca;
+        String msg = "Total Vendido no Dia.: R$+" + Formatador.formataVirgula2(totalvenda) + "\n"
+                   + "Total Desconto...........: R$-" + Formatador.formataVirgula2(totaldesc)  + "\n"
+                   + "Total Troca...................: R$-" +  Formatador.formataVirgula2(totaltroca) + "\n"
                    + "Total Geral...................: R$" + Formatador.formataVirgula2(totalgeral) + "\n"
                    + "----------------------------------------------" + "\n"
                    + "Total Dinheiro....: R$" + Formatador.formataVirgula2(totaldinheiro) + "\n"

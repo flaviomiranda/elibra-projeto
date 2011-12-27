@@ -10,6 +10,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.swing.Icon;
@@ -283,7 +284,7 @@ public class TelaCaixa extends javax.swing.JDialog {
             }
         }
         }
-        Venda v = new Venda(cdvenda, cdformapagamento, login.getCD_FUNC(), 0,valordesconto, null,qtdparcelasnum, null,totalgeral);
+        Venda v = new Venda(cdvenda, cdformapagamento, login.getCD_FUNC(), 0,valordesconto, null,qtdparcelasnum, new Date(System.currentTimeMillis()),totalgeral);
         daovenda.insertVenda(v);
         for(int x=0; x < itenscarrinho.size(); x++)
         {

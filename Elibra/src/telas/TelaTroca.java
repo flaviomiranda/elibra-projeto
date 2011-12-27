@@ -313,7 +313,7 @@ public class TelaTroca extends javax.swing.JDialog {
                     DaoEstorno daoestorno = new DaoEstorno();
                     double cdest = daoestorno.selectMaxEstorno();
                     cdest ++;
-                    daoestorno.insertEstorno(new Estorno(cdest, motivo, p.getCD_PROD(), funcionarioglobal.getCD_FUNC(), null, valorunitario,descricao, null));
+                    daoestorno.insertEstorno(new Estorno(cdest, motivo, p.getCD_PROD(), funcionarioglobal.getCD_FUNC(), null, valorunitario,descricao, new Date(System.currentTimeMillis())));
                     JOptionPane.showMessageDialog(null, "Troca registrada com sucesso!");
                     dispose();
                    }
