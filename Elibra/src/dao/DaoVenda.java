@@ -19,7 +19,7 @@ public Venda selectVenda(int codigo)
 			ResultSet rs = ps.executeQuery();
 			if (rs.next())
 			{
-			    return new Venda(rs.getDouble(1),rs.getDouble(2),rs.getDouble(3),rs.getDouble(4),rs.getDouble(5), rs.getString(6), rs.getDouble(7), rs.getString(8), rs.getDouble(9));
+			    return new Venda(rs.getDouble(1),rs.getDouble(2),rs.getDouble(3),rs.getDouble(4),rs.getDouble(5), rs.getString(6), rs.getDouble(7), rs.getDate(8), rs.getDouble(9));
 			}else
 			{
 			    return null;
@@ -60,17 +60,14 @@ public int insertVenda(Venda v)
 		Connection con = ConFactory.conectar(0);
 		PreparedStatement ps = null;
 		try {
-			ps = con.prepareStatement("INSERT INTO TVENDA(CD_VENDA, CD_FORM_PGMTO, CD_FUNC, CD_CLI, VL_DESCONTO, HR_VENDA, QTD_PARCELA, DT_VENDA, VL_VENDA) VALUES (?,?,?,?,?,CURRENT_TIMESTAMP, ?, CURRENT_DATE,?)");
+			ps = con.prepareStatement("INSERT INTO TVENDA (CD_VENDA, CD_FORM_PGMTO, CD_FUNC, CD_CLI, VL_DESCONTO, HR_VENDA, QTD_PARCELA, DT_VENDA, VL_VENDA) VALUES (?,?,?,?,?,CURRENT_TIMESTAMP,?,SYSDATE,?)");
 
 
 			ps.setDouble(1, v.getCD_VENDA());
 			ps.setDouble(2, v.getCD_FORM_PGMTO());
                         ps.setDouble(3, v.getCD_FUNC());
-                        //ps.setDouble(3, 1);
 			ps.setDouble(4, v.getCD_CLI());
-                        //ps.setDouble(4, 1);
 			ps.setDouble(5, v.getVL_DESC());
-                        //ps.setString(6, v.getHR_VENDA());
                         ps.setDouble(6, v.getQTD_PARCELA());
                         ps.setDouble(7, v.getVL_VENDA());
 			ps.executeUpdate();
@@ -85,21 +82,21 @@ public int insertVenda(Venda v)
 		}
 	}
 
-public ArrayList<Venda> selectAllVendaBetweenDate (String dtinicio, String dtfim)
+public ArrayList<Venda> selectAllVendaBetweenDate (java.util.Date dtinicio, java.util.Date dtfim)
 	{
 		Connection con = ConFactory.conectar(0);
 		PreparedStatement ps = null;
 		try {
 			ps = con.prepareStatement("SELECT CD_VENDA, CD_FORM_PGMTO, CD_FUNC, CD_CLI, VL_DESCONTO, HR_VENDA, QTD_PARCELA, DT_VENDA, VL_VENDA FROM TVENDA WHERE DT_VENDA >= ? AND DT_VENDA <= ? ORDER BY CD_VENDA");
-			ps.setString(1, dtinicio);
-                        ps.setString(2, dtfim);
+			ps.setDate(1, new java.sql.Date (dtinicio.getTime()));
+                        ps.setDate(2, new java.sql.Date (dtfim.getTime()));
 			ArrayList<Venda> lista = new ArrayList<Venda>();
                         ResultSet rs = ps.executeQuery();
 			if (rs.next())
 			{
 
                             do{
-                                lista.add(new Venda(rs.getDouble(1),rs.getDouble(2),rs.getDouble(3),rs.getDouble(4),rs.getDouble(5), rs.getString(6), rs.getDouble(7), rs.getString(8), rs.getDouble(9)));
+                                lista.add(new Venda(rs.getDouble(1),rs.getDouble(2),rs.getDouble(3),rs.getDouble(4),rs.getDouble(5), rs.getString(6), rs.getDouble(7), rs.getDate(8), rs.getDouble(9)));
                             }while(rs.next() );
                             return lista;
 			}else
@@ -121,14 +118,14 @@ public ArrayList<Venda> selectAllVendaDia ()
 		Connection con = ConFactory.conectar(0);
 		PreparedStatement ps = null;
 		try {
-			ps = con.prepareStatement("SELECT CD_VENDA, CD_FORM_PGMTO, CD_FUNC, CD_CLI, VL_DESCONTO, HR_VENDA, QTD_PARCELA, DT_VENDA, VL_VENDA FROM TVENDA WHERE DT_VENDA = CURRENT_DATE ORDER BY CD_VENDA");
+			ps = con.prepareStatement("SELECT CD_VENDA, CD_FORM_PGMTO, CD_FUNC, CD_CLI, VL_DESCONTO, HR_VENDA, QTD_PARCELA, DT_VENDA, VL_VENDA FROM TVENDA WHERE DT_VENDA >= TO_CHAR(SYSDATE) ORDER BY CD_VENDA");
 			ArrayList<Venda> lista = new ArrayList<Venda>();
                         ResultSet rs = ps.executeQuery();
 			if (rs.next())
 			{
 
                             do{
-                                lista.add(new Venda(rs.getDouble(1),rs.getDouble(2),rs.getDouble(3),rs.getDouble(4),rs.getDouble(5), rs.getString(6), rs.getDouble(7), rs.getString(8), rs.getDouble(9)));
+                                lista.add(new Venda(rs.getDouble(1),rs.getDouble(2),rs.getDouble(3),rs.getDouble(4),rs.getDouble(5), rs.getString(6), rs.getDouble(7), rs.getDate(8), rs.getDouble(9)));
                             }while(rs.next() );
                             return lista;
 			}else

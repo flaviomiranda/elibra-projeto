@@ -1,20 +1,20 @@
 package model;
 
 public class Motivo {
-	int CD_MOTIVO;
+	double CD_MOTIVO;
 	String DS_MOTIVO;
 	
-	public Motivo(int cd_motivo, String ds_motivo) {
+	public Motivo(double cd_motivo, String ds_motivo) {
 		super();
 		CD_MOTIVO = cd_motivo;
 		DS_MOTIVO = ds_motivo;
 	}
 
-	public int getCD_MOTIVO() {
+	public double getCD_MOTIVO() {
 		return CD_MOTIVO;
 	}
 
-	public void setCD_MOTIVO(int cd_motivo) {
+	public void setCD_MOTIVO(double cd_motivo) {
 		CD_MOTIVO = cd_motivo;
 	}
 
