@@ -5,5 +5,5 @@
 2011-12-22-16.11.00 - null
 2011-12-22-16.11.00 - class java.sql.SQLException
 
-2011-12-27-11.13.40 - Erro no INSERT na TESTORNO
-2011-12-27-11.13.40 - Índice de coluna inválido
+2011-12-27-11.24.37 - Erro no INSERT na TESTORNO
+2011-12-27-11.24.37 - ORA-01400: não é possível inserir NULL em ("RAFAEL"."TESTORNO"."DS_MOTVO_ESTNO")

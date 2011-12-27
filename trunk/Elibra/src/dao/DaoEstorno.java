@@ -63,11 +63,9 @@ public int insertEstorno(Estorno e)
 			ps.setDouble(2, e.getCD_MOTIVO());
                         ps.setDouble(3, e.getCD_PROD());
 			ps.setDouble(4, e.getCD_FUNC());
-			//ps.setString(5, e.getHR_EST());
-                        ps.setDouble(6, e.getVL_UNIT_PROD());
-                        ps.setString(7, e.getDS_MOTVO_ESTNO());
-                        //ps.setString(7, e.getDT_EST());
-			ps.executeUpdate();
+			ps.setDouble(5, e.getVL_UNIT_PROD());
+                        ps.setString(6, e.getDS_MOTVO_ESTNO());
+                        ps.executeUpdate();
 			return 0;                  
 	           }
 			catch (SQLException x) {
