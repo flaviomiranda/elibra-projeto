@@ -1,20 +1,14 @@
 package telas;
 
-import dao.DaoCategoria;
 import dao.DaoEstorno;
-import dao.DaoMarca;
 import dao.DaoMotivo;
 import dao.DaoProduto;
 import java.util.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.TreeMap;
 import javax.swing.JOptionPane;
-import model.Categoria;
 import model.Estorno;
 import model.Funcionario;
-import model.Marca;
 import model.Motivo;
 import model.Produto;
 import utilitarios.Formatador;
@@ -33,7 +27,6 @@ public class TelaTroca extends javax.swing.JDialog {
 
     public void carregaConsulta(Produto p)
     {
-        //tipo 1 = Codigo de Barras 
          txtCodigoBarras.setText(p.getCD_BARRA_PROD());
          txtVlUnit.setText(Formatador.formataVirgula2(p.getVL_PROD()));
          txtProduto.setText(p.getNM_PROD());
@@ -313,6 +306,10 @@ public class TelaTroca extends javax.swing.JDialog {
                     DaoEstorno daoestorno = new DaoEstorno();
                     double cdest = daoestorno.selectMaxEstorno();
                     cdest ++;
+                    double qtdproduto = p.getQTD_PROD();
+                    qtdproduto ++;
+                    p.setQTD_PROD(qtdproduto);
+                    daoproduto.updateProduto(p);
                     daoestorno.insertEstorno(new Estorno(cdest, motivo, p.getCD_PROD(), funcionarioglobal.getCD_FUNC(), null, valorunitario,descricao, new Date(System.currentTimeMillis())));
                     JOptionPane.showMessageDialog(null, "Troca registrada com sucesso!");
                     dispose();
