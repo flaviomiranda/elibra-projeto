@@ -5,5 +5,10 @@
 2011-12-22-16.11.00 - null
 2011-12-22-16.11.00 - class java.sql.SQLException
 
-2011-12-27-11.13.40 - Erro no INSERT na TESTORNO
-2011-12-27-11.13.40 - Índice de coluna inválido
+2011-12-26-15.46.40 - Erro ao conectar
+2011-12-26-15.46.40 - ORA-01017: invalid username/password; logon denied
+
+2011-12-26-15.46.40 - ORA-01017: invalid username/password; logon denied
+
+2011-12-26-15.46.40 - null
+2011-12-26-15.46.40 - class java.sql.SQLException

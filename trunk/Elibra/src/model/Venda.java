@@ -1,4 +1,5 @@
 package model;
+import java.util.Date;
 
 public class Venda {
 	double CD_VENDA;
@@ -8,10 +9,10 @@ public class Venda {
 	double VL_DESC;
 	String HR_VENDA;
         double QTD_PARCELA;
-        String DT_VENDA;
+        Date DT_VENDA;
         double VL_VENDA;
 	
-	public Venda(double cd_venda, double cd_form_pgmto, double cd_func, double cd_cli, double vl_desc, String hr_venda, double qtd_parcela, String dt_venda, double vl_venda) {
+	public Venda(double cd_venda, double cd_form_pgmto, double cd_func, double cd_cli, double vl_desc, String hr_venda, double qtd_parcela, Date dt_venda, double vl_venda) {
 		super();
 		CD_VENDA = cd_venda;
 		CD_FORM_PGMTO = cd_form_pgmto;
@@ -80,11 +81,11 @@ public class Venda {
             this.QTD_PARCELA = QTD_PARCELA;
         }
 
-    public String getDT_VENDA() {
+    public Date getDT_VENDA() {
         return DT_VENDA;
     }
 
-    public void setDT_VENDA(String DT_VENDA) {
+    public void setDT_VENDA(Date DT_VENDA) {
         this.DT_VENDA = DT_VENDA;
     }
 

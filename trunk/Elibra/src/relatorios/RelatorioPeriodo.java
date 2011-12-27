@@ -11,6 +11,7 @@
 package relatorios;
 
 import dao.DaoCategoria;
+import java.util.Date;
 import dao.DaoFormaPagamento;
 import dao.DaoFuncionario;
 import utilitarios.Formatador;
@@ -132,7 +133,7 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
     {
     	
         String det="";
-        String dtanterior="";
+        Date dtanterior= null;
         double totalcartaodia =0;
         double totaldinheirodia = 0;
         double totaldebitodia = 0;
@@ -146,7 +147,7 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
         {
             Venda v = lista.get(x);
             //Trata Quebra de dia
-            if (!dtanterior.equalsIgnoreCase(v.getDT_VENDA()))
+            if (dtanterior != v.getDT_VENDA())
             {
                 dtanterior = v.getDT_VENDA();
                 det+= "\n\t\t Dia: "+ dtanterior;
@@ -188,7 +189,7 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
             
             det+="\n";
             
-            if (lista.size() == x+1 ||!dtanterior.equalsIgnoreCase(lista.get(x+1).getDT_VENDA()))
+            if (lista.size() == x+1 ||dtanterior != (lista.get(x+1).getDT_VENDA()))
             {
                 double tot = totalcartaodia + totaldinheirodia + totaldebitodia;
                 det+= "Total Vendido No Dia: " + Formatador.formataVirgula2(tot) + "\t(Dinheiro: " + Formatador.formataVirgula2(totaldinheirodia) + "\t Débito: " + Formatador.formataVirgula2(totaldebitodia) + "\t Cartão: " + Formatador.formataVirgula2(totalcartaodia) + "\t Cheque: " + Formatador.formataVirgula2(totalchequedia) + ")";

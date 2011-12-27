@@ -273,7 +273,7 @@ public class TelaCaixa extends javax.swing.JDialog {
         else{
             if (cdformapagamento == 2){
             String qtdparcelas = JOptionPane.showInputDialog(null, "Informe a quantidade de parcelas", "Parcelas", JOptionPane.QUESTION_MESSAGE);
-            if (qtdparcelas == null || qtdparcelas.equals("") || qtdparcelas.equals("0"))
+            if (qtdparcelas == null || qtdparcelas.equals(""))
                 return;
             qtdparcelasnum = Double.parseDouble(qtdparcelas);
             if (qtdparcelasnum > 6)
@@ -296,7 +296,7 @@ public class TelaCaixa extends javax.swing.JDialog {
             p.setQTD_PROD(qtdatual - cc.getQuantidade());
             daoproduto.updateProduto(p);
         }
-        imprimirCupom(v);
+        //imprimirCupom(v);
         JOptionPane.showMessageDialog(null, "Venda Realizada com Sucesso!");
         novavenda();
       

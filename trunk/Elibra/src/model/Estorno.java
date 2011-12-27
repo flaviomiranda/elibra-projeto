@@ -9,8 +9,9 @@ public class Estorno {
 	String HR_EST;
 	double VL_UNIT_PROD; 
 	String DS_MOTVO_ESTNO;
+        String DT_EST;
 	
-	public Estorno(double nseq_estno, double cd_motivo, double cd_prod, double cd_func, String hr_est, double vl_unit_prod, String ds_motvo_estno) {
+	public Estorno(double nseq_estno, double cd_motivo, double cd_prod, double cd_func, String hr_est, double vl_unit_prod, String ds_motvo_estno, String dt_est) {
 		super();
 		NSEQ_ESTNO = nseq_estno;
 		CD_MOTIVO = cd_motivo;
@@ -19,6 +20,7 @@ public class Estorno {
 		HR_EST = hr_est;
 		VL_UNIT_PROD = vl_unit_prod;
 		DS_MOTVO_ESTNO = ds_motvo_estno;
+                DT_EST = dt_est;
 	}
 
 	public double getCD_FUNC() {
@@ -76,5 +78,12 @@ public class Estorno {
 	public void setVL_UNIT_PROD(double vl_unit_prod) {
 		VL_UNIT_PROD = vl_unit_prod;
 	}
-	
+
+        public String getDT_EST() {
+            return DT_EST;
+        }
+
+        public void setDT_EST(String DT_EST) {
+            this.DT_EST = DT_EST;
+        }
 }

@@ -7,7 +7,10 @@ import dao.DaoLogin;
 import dao.DaoMarca;
 import dao.DaoProduto;
 import dao.DaoVenda;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.*;
 import java.util.TreeMap;
 import javax.swing.JOptionPane;
 import model.Categoria;
@@ -64,7 +67,9 @@ public class TelaMenu extends javax.swing.JFrame {
         jMenuItem13 = new javax.swing.JMenuItem();
         jSeparator7 = new javax.swing.JPopupMenu.Separator();
         jMenuItem14 = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
+        btnTroca = new javax.swing.JMenu();
+        Troca = new javax.swing.JMenuItem();
+        jSeparator8 = new javax.swing.JPopupMenu.Separator();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
@@ -187,7 +192,22 @@ public class TelaMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu6);
 
-        jMenu7.setText("Serviços");
+        btnTroca.setText("Serviços");
+
+        Troca.setText("Troca");
+        Troca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TrocaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                TrocaMouseEntered(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                TrocaMouseReleased(evt);
+            }
+        });
+        btnTroca.add(Troca);
+        btnTroca.add(jSeparator8);
 
         jMenu8.setText("Incluir");
 
@@ -227,14 +247,14 @@ public class TelaMenu extends javax.swing.JFrame {
         jMenuItem11.setEnabled(false);
         jMenu8.add(jMenuItem11);
 
-        jMenu7.add(jMenu8);
-        jMenu7.add(jSeparator6);
+        btnTroca.add(jMenu8);
+        btnTroca.add(jSeparator6);
 
         jMenuItem12.setText("Configura Impressão");
         jMenuItem12.setEnabled(false);
-        jMenu7.add(jMenuItem12);
+        btnTroca.add(jMenuItem12);
 
-        jMenuBar1.add(jMenu7);
+        jMenuBar1.add(btnTroca);
 
         setJMenuBar(jMenuBar1);
 
@@ -418,12 +438,27 @@ public class TelaMenu extends javax.swing.JFrame {
             return;
         }
  */
-        String dtinicio = JOptionPane.showInputDialog(null, "Digite o Dia Inicial da Pesquisa(DD/MM/AAAA)");
-        if (dtinicio == null || dtinicio.equals(""))
+        String dtiniciox = JOptionPane.showInputDialog(null, "Digite o Dia Inicial da Pesquisa(DD/MM/AAAA)");
+        if (dtiniciox == null || dtiniciox.equals(""))
             return;
-        String dtfim = JOptionPane.showInputDialog(null, "Digite o Dia Final da Pesquisa(DD/MM/AAAA)");
-        if (dtfim == null || dtfim.equals(""))
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            Date dtinicio = null;
+            try {
+                    dtinicio = (java.util.Date) format.parse(dtiniciox);
+                }
+            catch (ParseException ex) {
+                JOptionPane.showMessageDialog(null, "Data digitada é inválida");
+            }
+        String dtfimx = JOptionPane.showInputDialog(null, "Digite o Dia Final da Pesquisa(DD/MM/AAAA)");
+        if (dtfimx == null || dtfimx.equals(""))
             return;
+        Date dtfim = null;
+            try {
+                    dtfim = (java.util.Date) format.parse(dtfimx);
+                }
+            catch (ParseException ex) {
+                JOptionPane.showMessageDialog(null, "Data digitada é inválida");
+            }
         //recebe dados a ser pesquisado
         DaoVenda daovenda = new DaoVenda();
         ArrayList<Venda> lista = new ArrayList<Venda>();
@@ -504,18 +539,42 @@ public class TelaMenu extends javax.swing.JFrame {
             }
            
         }
-        String msg = "Total Vendido no Dia: R$" + Formatador.formataVirgula2(totalvenda) + "\n"
-                   + "Total Desconto......: R$" + Formatador.formataVirgula2(totaldesc)  + "\n"
-                   + "Total Geral.........: R$" + Formatador.formataVirgula2(totalgeral) + "\n"
+        String msg = "Total Vendido no Dia.: R$" + Formatador.formataVirgula2(totalvenda) + "\n"
+                   + "Total Desconto...........: R$" + Formatador.formataVirgula2(totaldesc)  + "\n"
+                   + "Total Geral...................: R$" + Formatador.formataVirgula2(totalgeral) + "\n"
                    + "----------------------------------------------" + "\n"
-                   + "Total Dinheiro......: R$" + Formatador.formataVirgula2(totaldinheiro) + "\n"
+                   + "Total Dinheiro....: R$" + Formatador.formataVirgula2(totaldinheiro) + "\n"
                    + "Total Débito........: R$" + Formatador.formataVirgula2(totaldebito) + "\n"
                    + "Total Crédito.......: R$" + Formatador.formataVirgula2(totalcredito) + "\n"
-                   + "Total Cheque........: R$" + Formatador.formataVirgula2(totalcheque);
+                   + "Total Cheque......: R$" + Formatador.formataVirgula2(totalcheque);
         
         JOptionPane.showMessageDialog(null, msg, "Fechamento do Dia", JOptionPane.INFORMATION_MESSAGE);
                 
     }//GEN-LAST:event_jMenuItem14MouseReleased
+
+    private void TrocaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TrocaMouseClicked
+       
+    }//GEN-LAST:event_TrocaMouseClicked
+
+    private void TrocaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TrocaMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TrocaMouseEntered
+
+    private void TrocaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TrocaMouseReleased
+        String codigobarra = JOptionPane.showInputDialog(null, "Digite o Código de Barras");
+        if (codigobarra == null)
+            return;
+        DaoProduto daoproduto = new DaoProduto();
+        Produto p = daoproduto.selectCodigoBarraProduto(codigobarra);
+         if (p == null)
+         {
+             JOptionPane.showMessageDialog(null, "Produto não Cadastrado!");
+             return;
+         }
+        TelaTroca tt = new TelaTroca(this, true, p, f);
+        tt.setLocationRelativeTo(null);
+        tt.setVisible(true);
+    }//GEN-LAST:event_TrocaMouseReleased
 
     /**
     * @param args the command line arguments
@@ -529,6 +588,8 @@ public class TelaMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Troca;
+    private javax.swing.JMenu btnTroca;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JMenu jMenu1;
@@ -537,7 +598,6 @@ public class TelaMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
@@ -562,6 +622,7 @@ public class TelaMenu extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;
+    private javax.swing.JPopupMenu.Separator jSeparator8;
     // End of variables declaration//GEN-END:variables
 
 }
