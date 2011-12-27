@@ -406,10 +406,10 @@ public class TelaCaixa extends javax.swing.JDialog {
     public void exibetotais()
     {
         txtValorTotal.setText(Formatador.formataVirgula2(valortotal));
-        txtSubtotal.setText(Formatador.formataVirgula2(valortotal));
         double desconto = valordesconto;
         double totalgeraldesc = totalgeral - desconto;
         lblTotalGeral.setText(Formatador.formataVirgula2(totalgeraldesc));
+        txtDesc.setText(Formatador.formataVirgula2(desconto));
     }
 
 
@@ -420,7 +420,7 @@ public class TelaCaixa extends javax.swing.JDialog {
         txtQuantidade.setText(null);
         txtValorUnitario.setText(null);
         txtValorTotal.setText(null);
-        txtSubtotal.setText(null);
+        txtDesc.setText(null);
     }
 
     public void carregaTela(Produto p){
@@ -487,7 +487,7 @@ public class TelaCaixa extends javax.swing.JDialog {
         txtValorTotal = new javax.swing.JTextField();
         txtValorUnitario = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtSubtotal = new javax.swing.JTextField();
+        txtDesc = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -556,13 +556,13 @@ public class TelaCaixa extends javax.swing.JDialog {
         txtValorUnitario.setFocusable(false);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18));
-        jLabel6.setText("Subtotal");
+        jLabel6.setText("Desconto");
 
-        txtSubtotal.setFont(new java.awt.Font("Tahoma", 1, 18));
-        txtSubtotal.setFocusable(false);
-        txtSubtotal.addActionListener(new java.awt.event.ActionListener() {
+        txtDesc.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtDesc.setFocusable(false);
+        txtDesc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSubtotalActionPerformed(evt);
+                txtDescActionPerformed(evt);
             }
         });
 
@@ -698,7 +698,7 @@ public class TelaCaixa extends javax.swing.JDialog {
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(22, 22, 22)
                                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(txtSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel6)
@@ -757,7 +757,7 @@ public class TelaCaixa extends javax.swing.JDialog {
                             .addComponent(jLabel5)
                             .addComponent(jLabel6))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSubtotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDesc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(txtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -790,9 +790,9 @@ public class TelaCaixa extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoBarrasActionPerformed
 
-    private void txtSubtotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubtotalActionPerformed
+    private void txtDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSubtotalActionPerformed
+    }//GEN-LAST:event_txtDescActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -823,9 +823,9 @@ public class TelaCaixa extends javax.swing.JDialog {
     private javax.swing.JLabel lblOperador;
     private javax.swing.JLabel lblTotalGeral;
     private javax.swing.JTextField txtCodigoBarras;
+    private javax.swing.JTextField txtDesc;
     private javax.swing.JTextArea txtNotaFiscal;
     private javax.swing.JTextField txtQuantidade;
-    private javax.swing.JTextField txtSubtotal;
     private javax.swing.JTextField txtValorTotal;
     private javax.swing.JTextField txtValorUnitario;
     // End of variables declaration//GEN-END:variables
