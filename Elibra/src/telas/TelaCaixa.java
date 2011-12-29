@@ -298,7 +298,7 @@ public class TelaCaixa extends javax.swing.JDialog {
             p.setQTD_PROD(qtdatual - cc.getQuantidade());
             daoproduto.updateProduto(p);
         }
-        //imprimirCupom(v);
+        imprimirCupom(v);
         JOptionPane.showMessageDialog(null, "Venda Realizada com Sucesso!");
         novavenda();
       
