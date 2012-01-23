@@ -23,6 +23,7 @@ import model.Motivo;
 import model.Produto;
 import model.Venda;
 import relatorios.RelatorioPeriodo;
+import relatorios.RelatorioRelacaoProdutos;
 import utilitarios.Formatador;
 
 public class TelaMenu extends javax.swing.JFrame {
@@ -360,17 +361,17 @@ public class TelaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem7MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem7MouseReleased
- /*
-        if (f.getCD_ACESSO() == 0)
-        {
-            Exception e = null;
-            JOptionPane.showMessageDialog(null,"Você não possui acesso, consulte administrador");
-            TrataErro.imprimeErro("O login: " + loginglobal + "tentou acessar o relatorio de relacao de produtos e nao possui acesso", e);
-        }
+ 
+  //      if (f.getCD_ACESSO() == 0)
+  //      {
+  //          Exception e = null;
+  //          JOptionPane.showMessageDialog(null,"Você não possui acesso, consulte administrador");
+  //          TrataErro.imprimeErro("O login: " + loginglobal + "tentou acessar o relatorio de relacao de produtos e nao possui acesso", e);
+  //      }
         RelatorioRelacaoProdutos rrp = new RelatorioRelacaoProdutos(null, true);
         rrp.setLocationRelativeTo(null);
         rrp.setVisible(true);
-   */     
+        
     }//GEN-LAST:event_jMenuItem7MouseReleased
 
     private void jMenuItem9KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jMenuItem9KeyReleased
@@ -508,6 +509,7 @@ public class TelaMenu extends javax.swing.JFrame {
         double totalvenda=0;
         double totaldesc=0;
         double totalgeral=0;
+        double totalcaderno=0;
         for(int x=0; x<lista.size();x++)
         {
             Venda v = lista.get(x);
@@ -540,6 +542,11 @@ public class TelaMenu extends javax.swing.JFrame {
                     totaldinheiro += vlvenda;
                     break;
                 }
+                case 5:
+                {
+                    totalcaderno += vlvenda;
+                    break;
+                }
             }
            
         }
@@ -562,7 +569,8 @@ public class TelaMenu extends javax.swing.JFrame {
                    + "Total Dinheiro....: R$" + Formatador.formataVirgula2(totaldinheiro) + "\n"
                    + "Total Débito........: R$" + Formatador.formataVirgula2(totaldebito) + "\n"
                    + "Total Crédito.......: R$" + Formatador.formataVirgula2(totalcredito) + "\n"
-                   + "Total Cheque......: R$" + Formatador.formataVirgula2(totalcheque);
+                   + "Total Cheque......: R$" + Formatador.formataVirgula2(totalcheque) + "\n"
+                   + "Total Caderno.....: R$" + Formatador.formataVirgula2(totalcaderno);
         
         JOptionPane.showMessageDialog(null, msg, "Fechamento do Dia", JOptionPane.INFORMATION_MESSAGE);
                 
