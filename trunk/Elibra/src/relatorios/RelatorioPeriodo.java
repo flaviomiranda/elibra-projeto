@@ -146,6 +146,8 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
         double totaldinheiro = 0;
         double totaldebito = 0;
         double totalcheque = 0;
+        double totalcaderno = 0;
+        double totalcadernodia = 0;
         double totp=0;
         for(int x=0; x<lista.size();x++)
         {
@@ -191,6 +193,11 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
                     totaldinheirodia += vlvenda;
                     break;
                 }
+                case 5:
+                {
+                    totalcadernodia += vlvenda;
+                    break;
+                }
             }        
             
             det+="\n";
@@ -198,19 +205,21 @@ public class RelatorioPeriodo extends javax.swing.JDialog {
             if (lista.size() == x+1 )
             {
                 double tot = totalcartaodia + totaldinheirodia + totaldebitodia + totalchequedia;
-                det+= "\nTotal Vendido no Dia: R$" + Formatador.formataVirgula2(tot) + "\t\t(Dinheiro: R$" + Formatador.formataVirgula2(totaldinheirodia) + "\t Débito: R$" + Formatador.formataVirgula2(totaldebitodia) + "\t Cartão: R$" + Formatador.formataVirgula2(totalcartaodia) + "\t Cheque: R$" + Formatador.formataVirgula2(totalchequedia) + ")";
+                det+= "\nTotal Vendido no Dia: R$" + Formatador.formataVirgula2(tot) + "\t\t(Dinheiro: R$" + Formatador.formataVirgula2(totaldinheirodia) + "\t Débito: R$" + Formatador.formataVirgula2(totaldebitodia) + "\t Cartão: R$" + Formatador.formataVirgula2(totalcartaodia) + "\t Cheque: R$" + Formatador.formataVirgula2(totalchequedia) +"\t Caderno: R$" + Formatador.formataVirgula2(totalcadernodia) +")";
                 totalcartao += totalcartaodia;
                 totaldinheiro += totaldinheirodia;
                 totaldebito += totaldebitodia;
                 totalcheque+= totalchequedia;
+                totalcaderno +=totalcadernodia;
                 totalcartaodia = 0;
                 totaldinheirodia = 0;
                 totaldebitodia = 0;
                 totalchequedia = 0;
+                totalcadernodia = 0 ;
                 totp+=tot;
             }
         }
-        det+= "\n\nTotal Vendido no Periodo: R$" + Formatador.formataVirgula2(totp) + "\t(Dinheiro: R$" + Formatador.formataVirgula2(totaldinheiro) + "\t Débito: R$" + Formatador.formataVirgula2(totaldebito) + "\t Cartão: R$" + Formatador.formataVirgula2(totalcartao) + "\t Cheque: R$" + Formatador.formataVirgula2(totalcheque) + ")";
+        det+= "\n\nTotal Vendido no Periodo: R$" + Formatador.formataVirgula2(totp) + "\t(Dinheiro: R$" + Formatador.formataVirgula2(totaldinheiro) + "\t Débito: R$" + Formatador.formataVirgula2(totaldebito) + "\t Cartão: R$" + Formatador.formataVirgula2(totalcartao) + "\t Cheque: R$" + Formatador.formataVirgula2(totalcheque) + "\t Caderno: R$" + Formatador.formataVirgula2(totalcaderno) +")";
         txtRelatorio.setText(det);
     }
    
